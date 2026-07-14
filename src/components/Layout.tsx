@@ -42,7 +42,7 @@ export default function Layout() {
       <header className="fixed inset-x-0 top-4 z-50 px-3">
         <nav className="glass-surface noise-overlay mx-auto flex max-w-content items-center justify-between gap-2 rounded-full px-2 py-2 shadow-glass">
           <div className="flex items-center gap-2 pl-1.5">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-600 text-white">
+            <span className="grid h-9 w-9 place-items-center rounded-full bg-brand-700 text-white">
               <Wallet size={17} />
             </span>
             <span className="hidden font-display text-base font-semibold tracking-tight sm:block">
