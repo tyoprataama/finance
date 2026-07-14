@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+.env
+.env.local
+*.local
+.DS_Store
+logs
+*.log
+
+# Data pribadi - jangan commit ke repo publik
+.env.*
+!.env.example
+src/data/seed.json
+supabase/import_my_data.sql
+README.md

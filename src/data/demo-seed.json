@@ -1,0 +1,2403 @@
+{
+"categories": [
+{
+"id": "dc1",
+"name": "Gaji",
+"type": "income",
+"color": "#46A171"
+},
+{
+"id": "dc2",
+"name": "Freelance",
+"type": "income",
+"color": "#5E9FE8"
+},
+{
+"id": "dc3",
+"name": "Bonus",
+"type": "income",
+"color": "#4FB9C9"
+},
+{
+"id": "dc4",
+"name": "Investasi",
+"type": "income",
+"color": "#2783DE"
+},
+{
+"id": "dc5",
+"name": "Makan",
+"type": "expense",
+"color": "#DE9255"
+},
+{
+"id": "dc6",
+"name": "Transport",
+"type": "expense",
+"color": "#EAC26B"
+},
+{
+"id": "dc7",
+"name": "Belanja",
+"type": "expense",
+"color": "#BF8EDA"
+},
+{
+"id": "dc8",
+"name": "Hiburan",
+"type": "expense",
+"color": "#DF84A8"
+},
+{
+"id": "dc9",
+"name": "Tagihan",
+"type": "expense",
+"color": "#E56458"
+},
+{
+"id": "dc10",
+"name": "Kesehatan",
+"type": "expense",
+"color": "#10B981"
+},
+{
+"id": "dc11",
+"name": "Pendidikan",
+"type": "expense",
+"color": "#8B5CF6"
+},
+{
+"id": "dc12",
+"name": "Lainnya",
+"type": "expense",
+"color": "#7D7A75"
+}
+],
+"transactions": [
+{
+"id": "dt1",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-06-01",
+"created_at": "2025-06-01T09:00:00"
+},
+{
+"id": "dt2",
+"category_id": "dc2",
+"type": "income",
+"amount": 750000,
+"note": "Proyek freelance",
+"date": "2025-06-18",
+"created_at": "2025-06-10T14:00:00"
+},
+{
+"id": "dt3",
+"category_id": "dc3",
+"type": "income",
+"amount": 2000000,
+"note": "Bonus",
+"date": "2025-06-25",
+"created_at": "2025-06-25T14:00:00"
+},
+{
+"id": "dt4",
+"category_id": "dc10",
+"type": "expense",
+"amount": 150000,
+"note": "Vitamin",
+"date": "2025-06-05",
+"created_at": "2025-06-05T12:00:00"
+},
+{
+"id": "dt5",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Vitamin",
+"date": "2025-06-08",
+"created_at": "2025-06-08T12:00:00"
+},
+{
+"id": "dt6",
+"category_id": "dc8",
+"type": "expense",
+"amount": 25000,
+"note": "Netflix",
+"date": "2025-06-15",
+"created_at": "2025-06-15T12:00:00"
+},
+{
+"id": "dt7",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Makan siang",
+"date": "2025-06-19",
+"created_at": "2025-06-19T12:00:00"
+},
+{
+"id": "dt8",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Seminar",
+"date": "2025-06-05",
+"created_at": "2025-06-05T12:00:00"
+},
+{
+"id": "dt9",
+"category_id": "dc12",
+"type": "expense",
+"amount": 20000,
+"note": "",
+"date": "2025-06-20",
+"created_at": "2025-06-20T12:00:00"
+},
+{
+"id": "dt10",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "",
+"date": "2025-06-09",
+"created_at": "2025-06-09T12:00:00"
+},
+{
+"id": "dt11",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Nasi goreng",
+"date": "2025-06-11",
+"created_at": "2025-06-11T12:00:00"
+},
+{
+"id": "dt12",
+"category_id": "dc10",
+"type": "expense",
+"amount": 150000,
+"note": "Obat",
+"date": "2025-06-05",
+"created_at": "2025-06-05T12:00:00"
+},
+{
+"id": "dt13",
+"category_id": "dc5",
+"type": "expense",
+"amount": 35000,
+"note": "Sarapan",
+"date": "2025-06-20",
+"created_at": "2025-06-20T12:00:00"
+},
+{
+"id": "dt14",
+"category_id": "dc7",
+"type": "expense",
+"amount": 500000,
+"note": "",
+"date": "2025-06-05",
+"created_at": "2025-06-05T12:00:00"
+},
+{
+"id": "dt15",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Sarapan",
+"date": "2025-06-20",
+"created_at": "2025-06-20T12:00:00"
+},
+{
+"id": "dt16",
+"category_id": "dc9",
+"type": "expense",
+"amount": 300000,
+"note": "Pulsa",
+"date": "2025-06-23",
+"created_at": "2025-06-23T12:00:00"
+},
+{
+"id": "dt17",
+"category_id": "dc7",
+"type": "expense",
+"amount": 500000,
+"note": "Peralatan dapur",
+"date": "2025-06-16",
+"created_at": "2025-06-16T12:00:00"
+},
+{
+"id": "dt18",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-07-01",
+"created_at": "2025-07-01T09:00:00"
+},
+{
+"id": "dt19",
+"category_id": "dc2",
+"type": "income",
+"amount": 750000,
+"note": "Proyek freelance",
+"date": "2025-07-11",
+"created_at": "2025-07-10T14:00:00"
+},
+{
+"id": "dt20",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "",
+"date": "2025-07-20",
+"created_at": "2025-07-20T12:00:00"
+},
+{
+"id": "dt21",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Air PDAM",
+"date": "2025-07-12",
+"created_at": "2025-07-12T12:00:00"
+},
+{
+"id": "dt22",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Seminar",
+"date": "2025-07-04",
+"created_at": "2025-07-04T12:00:00"
+},
+{
+"id": "dt23",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "Netflix",
+"date": "2025-07-07",
+"created_at": "2025-07-07T12:00:00"
+},
+{
+"id": "dt24",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Listrik",
+"date": "2025-07-15",
+"created_at": "2025-07-15T12:00:00"
+},
+{
+"id": "dt25",
+"category_id": "dc10",
+"type": "expense",
+"amount": 150000,
+"note": "Periksa dokter",
+"date": "2025-07-20",
+"created_at": "2025-07-20T12:00:00"
+},
+{
+"id": "dt26",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Skincare",
+"date": "2025-07-21",
+"created_at": "2025-07-21T12:00:00"
+},
+{
+"id": "dt27",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Air PDAM",
+"date": "2025-07-04",
+"created_at": "2025-07-04T12:00:00"
+},
+{
+"id": "dt28",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Listrik",
+"date": "2025-07-24",
+"created_at": "2025-07-24T12:00:00"
+},
+{
+"id": "dt29",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Servis motor",
+"date": "2025-07-22",
+"created_at": "2025-07-22T12:00:00"
+},
+{
+"id": "dt30",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Air PDAM",
+"date": "2025-07-11",
+"created_at": "2025-07-11T12:00:00"
+},
+{
+"id": "dt31",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Nasi goreng",
+"date": "2025-07-16",
+"created_at": "2025-07-16T12:00:00"
+},
+{
+"id": "dt32",
+"category_id": "dc11",
+"type": "expense",
+"amount": 150000,
+"note": "Buku",
+"date": "2025-07-05",
+"created_at": "2025-07-05T12:00:00"
+},
+{
+"id": "dt33",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Ojek online",
+"date": "2025-07-26",
+"created_at": "2025-07-26T12:00:00"
+},
+{
+"id": "dt34",
+"category_id": "dc6",
+"type": "expense",
+"amount": 50000,
+"note": "Tiket kereta",
+"date": "2025-07-14",
+"created_at": "2025-07-14T12:00:00"
+},
+{
+"id": "dt35",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-08-01",
+"created_at": "2025-08-01T09:00:00"
+},
+{
+"id": "dt36",
+"category_id": "dc2",
+"type": "income",
+"amount": 1500000,
+"note": "Proyek freelance",
+"date": "2025-08-18",
+"created_at": "2025-08-10T14:00:00"
+},
+{
+"id": "dt37",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "",
+"date": "2025-08-19",
+"created_at": "2025-08-19T12:00:00"
+},
+{
+"id": "dt38",
+"category_id": "dc8",
+"type": "expense",
+"amount": 75000,
+"note": "Netflix",
+"date": "2025-08-13",
+"created_at": "2025-08-13T12:00:00"
+},
+{
+"id": "dt39",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Nasi goreng",
+"date": "2025-08-04",
+"created_at": "2025-08-04T12:00:00"
+},
+{
+"id": "dt40",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Bensin",
+"date": "2025-08-23",
+"created_at": "2025-08-23T12:00:00"
+},
+{
+"id": "dt41",
+"category_id": "dc9",
+"type": "expense",
+"amount": 300000,
+"note": "Internet",
+"date": "2025-08-28",
+"created_at": "2025-08-28T12:00:00"
+},
+{
+"id": "dt42",
+"category_id": "dc6",
+"type": "expense",
+"amount": 10000,
+"note": "Ojek online",
+"date": "2025-08-11",
+"created_at": "2025-08-11T12:00:00"
+},
+{
+"id": "dt43",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "Nongkrong",
+"date": "2025-08-19",
+"created_at": "2025-08-19T12:00:00"
+},
+{
+"id": "dt44",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Seminar",
+"date": "2025-08-12",
+"created_at": "2025-08-12T12:00:00"
+},
+{
+"id": "dt45",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Dokter gigi",
+"date": "2025-08-21",
+"created_at": "2025-08-21T12:00:00"
+},
+{
+"id": "dt46",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "",
+"date": "2025-08-27",
+"created_at": "2025-08-27T12:00:00"
+},
+{
+"id": "dt47",
+"category_id": "dc8",
+"type": "expense",
+"amount": 75000,
+"note": "Nonton bioskop",
+"date": "2025-08-14",
+"created_at": "2025-08-14T12:00:00"
+},
+{
+"id": "dt48",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Listrik",
+"date": "2025-08-22",
+"created_at": "2025-08-22T12:00:00"
+},
+{
+"id": "dt49",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tiket kereta",
+"date": "2025-08-04",
+"created_at": "2025-08-04T12:00:00"
+},
+{
+"id": "dt50",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Makan siang",
+"date": "2025-08-05",
+"created_at": "2025-08-05T12:00:00"
+},
+{
+"id": "dt51",
+"category_id": "dc5",
+"type": "expense",
+"amount": 35000,
+"note": "Nasi goreng",
+"date": "2025-08-02",
+"created_at": "2025-08-02T12:00:00"
+},
+{
+"id": "dt52",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-09-01",
+"created_at": "2025-09-01T09:00:00"
+},
+{
+"id": "dt53",
+"category_id": "dc2",
+"type": "income",
+"amount": 1000000,
+"note": "Proyek freelance",
+"date": "2025-09-06",
+"created_at": "2025-09-10T14:00:00"
+},
+{
+"id": "dt54",
+"category_id": "dc4",
+"type": "income",
+"amount": 150000,
+"note": "Dividen",
+"date": "2025-09-22",
+"created_at": "2025-09-15T16:00:00"
+},
+{
+"id": "dt55",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Biaya admin",
+"date": "2025-09-10",
+"created_at": "2025-09-10T12:00:00"
+},
+{
+"id": "dt56",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Pulsa",
+"date": "2025-09-05",
+"created_at": "2025-09-05T12:00:00"
+},
+{
+"id": "dt57",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Air PDAM",
+"date": "2025-09-17",
+"created_at": "2025-09-17T12:00:00"
+},
+{
+"id": "dt58",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Ayam geprek",
+"date": "2025-09-06",
+"created_at": "2025-09-06T12:00:00"
+},
+{
+"id": "dt59",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tol",
+"date": "2025-09-17",
+"created_at": "2025-09-17T12:00:00"
+},
+{
+"id": "dt60",
+"category_id": "dc5",
+"type": "expense",
+"amount": 35000,
+"note": "Ayam geprek",
+"date": "2025-09-08",
+"created_at": "2025-09-08T12:00:00"
+},
+{
+"id": "dt61",
+"category_id": "dc5",
+"type": "expense",
+"amount": 35000,
+"note": "Makan siang",
+"date": "2025-09-24",
+"created_at": "2025-09-24T12:00:00"
+},
+{
+"id": "dt62",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Periksa dokter",
+"date": "2025-09-11",
+"created_at": "2025-09-11T12:00:00"
+},
+{
+"id": "dt63",
+"category_id": "dc10",
+"type": "expense",
+"amount": 75000,
+"note": "Periksa dokter",
+"date": "2025-09-13",
+"created_at": "2025-09-13T12:00:00"
+},
+{
+"id": "dt64",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Tol",
+"date": "2025-09-19",
+"created_at": "2025-09-19T12:00:00"
+},
+{
+"id": "dt65",
+"category_id": "dc7",
+"type": "expense",
+"amount": 120000,
+"note": "Skincare",
+"date": "2025-09-22",
+"created_at": "2025-09-22T12:00:00"
+},
+{
+"id": "dt66",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tiket kereta",
+"date": "2025-09-27",
+"created_at": "2025-09-27T12:00:00"
+},
+{
+"id": "dt67",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Tiket kereta",
+"date": "2025-09-08",
+"created_at": "2025-09-08T12:00:00"
+},
+{
+"id": "dt68",
+"category_id": "dc7",
+"type": "expense",
+"amount": 50000,
+"note": "Belanja bulanan",
+"date": "2025-09-25",
+"created_at": "2025-09-25T12:00:00"
+},
+{
+"id": "dt69",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Ojek online",
+"date": "2025-09-17",
+"created_at": "2025-09-17T12:00:00"
+},
+{
+"id": "dt70",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-10-01",
+"created_at": "2025-10-01T09:00:00"
+},
+{
+"id": "dt71",
+"category_id": "dc7",
+"type": "expense",
+"amount": 50000,
+"note": "Sabun & sampo",
+"date": "2025-10-13",
+"created_at": "2025-10-13T12:00:00"
+},
+{
+"id": "dt72",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Sarapan",
+"date": "2025-10-09",
+"created_at": "2025-10-09T12:00:00"
+},
+{
+"id": "dt73",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Skincare",
+"date": "2025-10-08",
+"created_at": "2025-10-08T12:00:00"
+},
+{
+"id": "dt74",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Kursus online",
+"date": "2025-10-28",
+"created_at": "2025-10-28T12:00:00"
+},
+{
+"id": "dt75",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "Donasi",
+"date": "2025-10-13",
+"created_at": "2025-10-13T12:00:00"
+},
+{
+"id": "dt76",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Kado teman",
+"date": "2025-10-05",
+"created_at": "2025-10-05T12:00:00"
+},
+{
+"id": "dt77",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Air PDAM",
+"date": "2025-10-07",
+"created_at": "2025-10-07T12:00:00"
+},
+{
+"id": "dt78",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Bakso",
+"date": "2025-10-27",
+"created_at": "2025-10-27T12:00:00"
+},
+{
+"id": "dt79",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Internet",
+"date": "2025-10-14",
+"created_at": "2025-10-14T12:00:00"
+},
+{
+"id": "dt80",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Nasi goreng",
+"date": "2025-10-06",
+"created_at": "2025-10-06T12:00:00"
+},
+{
+"id": "dt81",
+"category_id": "dc11",
+"type": "expense",
+"amount": 300000,
+"note": "Buku",
+"date": "2025-10-16",
+"created_at": "2025-10-16T12:00:00"
+},
+{
+"id": "dt82",
+"category_id": "dc11",
+"type": "expense",
+"amount": 300000,
+"note": "Kursus online",
+"date": "2025-10-28",
+"created_at": "2025-10-28T12:00:00"
+},
+{
+"id": "dt83",
+"category_id": "dc12",
+"type": "expense",
+"amount": 20000,
+"note": "Kado teman",
+"date": "2025-10-13",
+"created_at": "2025-10-13T12:00:00"
+},
+{
+"id": "dt84",
+"category_id": "dc5",
+"type": "expense",
+"amount": 75000,
+"note": "Kopi",
+"date": "2025-10-02",
+"created_at": "2025-10-02T12:00:00"
+},
+{
+"id": "dt85",
+"category_id": "dc10",
+"type": "expense",
+"amount": 75000,
+"note": "Dokter gigi",
+"date": "2025-10-25",
+"created_at": "2025-10-25T12:00:00"
+},
+{
+"id": "dt86",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Bensin",
+"date": "2025-10-28",
+"created_at": "2025-10-28T12:00:00"
+},
+{
+"id": "dt87",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Tol",
+"date": "2025-10-08",
+"created_at": "2025-10-08T12:00:00"
+},
+{
+"id": "dt88",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-11-01",
+"created_at": "2025-11-01T09:00:00"
+},
+{
+"id": "dt89",
+"category_id": "dc2",
+"type": "income",
+"amount": 1000000,
+"note": "Proyek freelance",
+"date": "2025-11-14",
+"created_at": "2025-11-10T14:00:00"
+},
+{
+"id": "dt90",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Ayam geprek",
+"date": "2025-11-03",
+"created_at": "2025-11-03T12:00:00"
+},
+{
+"id": "dt91",
+"category_id": "dc9",
+"type": "expense",
+"amount": 300000,
+"note": "BPJS",
+"date": "2025-11-23",
+"created_at": "2025-11-23T12:00:00"
+},
+{
+"id": "dt92",
+"category_id": "dc8",
+"type": "expense",
+"amount": 150000,
+"note": "Netflix",
+"date": "2025-11-28",
+"created_at": "2025-11-28T12:00:00"
+},
+{
+"id": "dt93",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Dokter gigi",
+"date": "2025-11-06",
+"created_at": "2025-11-06T12:00:00"
+},
+{
+"id": "dt94",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Nasi goreng",
+"date": "2025-11-21",
+"created_at": "2025-11-21T12:00:00"
+},
+{
+"id": "dt95",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Kopi",
+"date": "2025-11-06",
+"created_at": "2025-11-06T12:00:00"
+},
+{
+"id": "dt96",
+"category_id": "dc10",
+"type": "expense",
+"amount": 150000,
+"note": "Dokter gigi",
+"date": "2025-11-03",
+"created_at": "2025-11-03T12:00:00"
+},
+{
+"id": "dt97",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Sarapan",
+"date": "2025-11-19",
+"created_at": "2025-11-19T12:00:00"
+},
+{
+"id": "dt98",
+"category_id": "dc6",
+"type": "expense",
+"amount": 10000,
+"note": "Bensin",
+"date": "2025-11-10",
+"created_at": "2025-11-10T12:00:00"
+},
+{
+"id": "dt99",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Vitamin",
+"date": "2025-11-16",
+"created_at": "2025-11-16T12:00:00"
+},
+{
+"id": "dt100",
+"category_id": "dc9",
+"type": "expense",
+"amount": 300000,
+"note": "BPJS",
+"date": "2025-11-12",
+"created_at": "2025-11-12T12:00:00"
+},
+{
+"id": "dt101",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Seminar",
+"date": "2025-11-18",
+"created_at": "2025-11-18T12:00:00"
+},
+{
+"id": "dt102",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Tol",
+"date": "2025-11-16",
+"created_at": "2025-11-16T12:00:00"
+},
+{
+"id": "dt103",
+"category_id": "dc9",
+"type": "expense",
+"amount": 100000,
+"note": "BPJS",
+"date": "2025-11-18",
+"created_at": "2025-11-18T12:00:00"
+},
+{
+"id": "dt104",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tiket kereta",
+"date": "2025-11-19",
+"created_at": "2025-11-19T12:00:00"
+},
+{
+"id": "dt105",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Bakso",
+"date": "2025-11-15",
+"created_at": "2025-11-15T12:00:00"
+},
+{
+"id": "dt106",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Internet",
+"date": "2025-11-12",
+"created_at": "2025-11-12T12:00:00"
+},
+{
+"id": "dt107",
+"category_id": "dc8",
+"type": "expense",
+"amount": 49000,
+"note": "",
+"date": "2025-11-04",
+"created_at": "2025-11-04T12:00:00"
+},
+{
+"id": "dt108",
+"category_id": "dc6",
+"type": "expense",
+"amount": 10000,
+"note": "Ojek online",
+"date": "2025-11-27",
+"created_at": "2025-11-27T12:00:00"
+},
+{
+"id": "dt109",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Kado teman",
+"date": "2025-11-23",
+"created_at": "2025-11-23T12:00:00"
+},
+{
+"id": "dt110",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2025-12-01",
+"created_at": "2025-12-01T09:00:00"
+},
+{
+"id": "dt111",
+"category_id": "dc2",
+"type": "income",
+"amount": 750000,
+"note": "Proyek freelance",
+"date": "2025-12-20",
+"created_at": "2025-12-10T14:00:00"
+},
+{
+"id": "dt112",
+"category_id": "dc3",
+"type": "income",
+"amount": 2000000,
+"note": "Bonus",
+"date": "2025-12-25",
+"created_at": "2025-12-25T14:00:00"
+},
+{
+"id": "dt113",
+"category_id": "dc4",
+"type": "income",
+"amount": 150000,
+"note": "Dividen",
+"date": "2025-12-22",
+"created_at": "2025-12-15T16:00:00"
+},
+{
+"id": "dt114",
+"category_id": "dc5",
+"type": "expense",
+"amount": 75000,
+"note": "Sarapan",
+"date": "2025-12-23",
+"created_at": "2025-12-23T12:00:00"
+},
+{
+"id": "dt115",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "",
+"date": "2025-12-24",
+"created_at": "2025-12-24T12:00:00"
+},
+{
+"id": "dt116",
+"category_id": "dc8",
+"type": "expense",
+"amount": 75000,
+"note": "Netflix",
+"date": "2025-12-12",
+"created_at": "2025-12-12T12:00:00"
+},
+{
+"id": "dt117",
+"category_id": "dc7",
+"type": "expense",
+"amount": 50000,
+"note": "",
+"date": "2025-12-12",
+"created_at": "2025-12-12T12:00:00"
+},
+{
+"id": "dt118",
+"category_id": "dc7",
+"type": "expense",
+"amount": 200000,
+"note": "Skincare",
+"date": "2025-12-02",
+"created_at": "2025-12-02T12:00:00"
+},
+{
+"id": "dt119",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Pulsa",
+"date": "2025-12-16",
+"created_at": "2025-12-16T12:00:00"
+},
+{
+"id": "dt120",
+"category_id": "dc7",
+"type": "expense",
+"amount": 500000,
+"note": "Baju",
+"date": "2025-12-18",
+"created_at": "2025-12-18T12:00:00"
+},
+{
+"id": "dt121",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Obat",
+"date": "2025-12-04",
+"created_at": "2025-12-04T12:00:00"
+},
+{
+"id": "dt122",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Es teh",
+"date": "2025-12-04",
+"created_at": "2025-12-04T12:00:00"
+},
+{
+"id": "dt123",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Es teh",
+"date": "2025-12-26",
+"created_at": "2025-12-26T12:00:00"
+},
+{
+"id": "dt124",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Es teh",
+"date": "2025-12-28",
+"created_at": "2025-12-28T12:00:00"
+},
+{
+"id": "dt125",
+"category_id": "dc8",
+"type": "expense",
+"amount": 150000,
+"note": "Nongkrong",
+"date": "2025-12-06",
+"created_at": "2025-12-06T12:00:00"
+},
+{
+"id": "dt126",
+"category_id": "dc11",
+"type": "expense",
+"amount": 300000,
+"note": "Kursus online",
+"date": "2025-12-17",
+"created_at": "2025-12-17T12:00:00"
+},
+{
+"id": "dt127",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "Nasi goreng",
+"date": "2025-12-10",
+"created_at": "2025-12-10T12:00:00"
+},
+{
+"id": "dt128",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "Nonton bioskop",
+"date": "2025-12-04",
+"created_at": "2025-12-04T12:00:00"
+},
+{
+"id": "dt129",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Donasi",
+"date": "2025-12-04",
+"created_at": "2025-12-04T12:00:00"
+},
+{
+"id": "dt130",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Kursus online",
+"date": "2025-12-09",
+"created_at": "2025-12-09T12:00:00"
+},
+{
+"id": "dt131",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-01-01",
+"created_at": "2026-01-01T09:00:00"
+},
+{
+"id": "dt132",
+"category_id": "dc10",
+"type": "expense",
+"amount": 150000,
+"note": "Obat",
+"date": "2026-01-15",
+"created_at": "2026-01-15T12:00:00"
+},
+{
+"id": "dt133",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Sarapan",
+"date": "2026-01-18",
+"created_at": "2026-01-18T12:00:00"
+},
+{
+"id": "dt134",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Makan siang",
+"date": "2026-01-07",
+"created_at": "2026-01-07T12:00:00"
+},
+{
+"id": "dt135",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Es teh",
+"date": "2026-01-08",
+"created_at": "2026-01-08T12:00:00"
+},
+{
+"id": "dt136",
+"category_id": "dc10",
+"type": "expense",
+"amount": 75000,
+"note": "Periksa dokter",
+"date": "2026-01-26",
+"created_at": "2026-01-26T12:00:00"
+},
+{
+"id": "dt137",
+"category_id": "dc9",
+"type": "expense",
+"amount": 100000,
+"note": "Air PDAM",
+"date": "2026-01-18",
+"created_at": "2026-01-18T12:00:00"
+},
+{
+"id": "dt138",
+"category_id": "dc7",
+"type": "expense",
+"amount": 50000,
+"note": "Baju",
+"date": "2026-01-27",
+"created_at": "2026-01-27T12:00:00"
+},
+{
+"id": "dt139",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "",
+"date": "2026-01-02",
+"created_at": "2026-01-02T12:00:00"
+},
+{
+"id": "dt140",
+"category_id": "dc10",
+"type": "expense",
+"amount": 250000,
+"note": "Obat",
+"date": "2026-01-08",
+"created_at": "2026-01-08T12:00:00"
+},
+{
+"id": "dt141",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Pulsa",
+"date": "2026-01-05",
+"created_at": "2026-01-05T12:00:00"
+},
+{
+"id": "dt142",
+"category_id": "dc10",
+"type": "expense",
+"amount": 250000,
+"note": "Periksa dokter",
+"date": "2026-01-28",
+"created_at": "2026-01-28T12:00:00"
+},
+{
+"id": "dt143",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Ojek online",
+"date": "2026-01-09",
+"created_at": "2026-01-09T12:00:00"
+},
+{
+"id": "dt144",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Biaya admin",
+"date": "2026-01-06",
+"created_at": "2026-01-06T12:00:00"
+},
+{
+"id": "dt145",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Makan siang",
+"date": "2026-01-28",
+"created_at": "2026-01-28T12:00:00"
+},
+{
+"id": "dt146",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Es teh",
+"date": "2026-01-22",
+"created_at": "2026-01-22T12:00:00"
+},
+{
+"id": "dt147",
+"category_id": "dc8",
+"type": "expense",
+"amount": 25000,
+"note": "Nonton bioskop",
+"date": "2026-01-07",
+"created_at": "2026-01-07T12:00:00"
+},
+{
+"id": "dt148",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-02-01",
+"created_at": "2026-02-01T09:00:00"
+},
+{
+"id": "dt149",
+"category_id": "dc4",
+"type": "income",
+"amount": 400000,
+"note": "Dividen",
+"date": "2026-02-19",
+"created_at": "2026-02-15T16:00:00"
+},
+{
+"id": "dt150",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Bensin",
+"date": "2026-02-24",
+"created_at": "2026-02-24T12:00:00"
+},
+{
+"id": "dt151",
+"category_id": "dc9",
+"type": "expense",
+"amount": 100000,
+"note": "Air PDAM",
+"date": "2026-02-07",
+"created_at": "2026-02-07T12:00:00"
+},
+{
+"id": "dt152",
+"category_id": "dc9",
+"type": "expense",
+"amount": 150000,
+"note": "Air PDAM",
+"date": "2026-02-02",
+"created_at": "2026-02-02T12:00:00"
+},
+{
+"id": "dt153",
+"category_id": "dc7",
+"type": "expense",
+"amount": 200000,
+"note": "Sabun & sampo",
+"date": "2026-02-19",
+"created_at": "2026-02-19T12:00:00"
+},
+{
+"id": "dt154",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Ayam geprek",
+"date": "2026-02-11",
+"created_at": "2026-02-11T12:00:00"
+},
+{
+"id": "dt155",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Bakso",
+"date": "2026-02-02",
+"created_at": "2026-02-02T12:00:00"
+},
+{
+"id": "dt156",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "",
+"date": "2026-02-17",
+"created_at": "2026-02-17T12:00:00"
+},
+{
+"id": "dt157",
+"category_id": "dc12",
+"type": "expense",
+"amount": 20000,
+"note": "Donasi",
+"date": "2026-02-08",
+"created_at": "2026-02-08T12:00:00"
+},
+{
+"id": "dt158",
+"category_id": "dc5",
+"type": "expense",
+"amount": 75000,
+"note": "Kopi",
+"date": "2026-02-10",
+"created_at": "2026-02-10T12:00:00"
+},
+{
+"id": "dt159",
+"category_id": "dc5",
+"type": "expense",
+"amount": 35000,
+"note": "Makan siang",
+"date": "2026-02-14",
+"created_at": "2026-02-14T12:00:00"
+},
+{
+"id": "dt160",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "Spotify",
+"date": "2026-02-02",
+"created_at": "2026-02-02T12:00:00"
+},
+{
+"id": "dt161",
+"category_id": "dc12",
+"type": "expense",
+"amount": 20000,
+"note": "Kado teman",
+"date": "2026-02-09",
+"created_at": "2026-02-09T12:00:00"
+},
+{
+"id": "dt162",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "",
+"date": "2026-02-24",
+"created_at": "2026-02-24T12:00:00"
+},
+{
+"id": "dt163",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Sabun & sampo",
+"date": "2026-02-25",
+"created_at": "2026-02-25T12:00:00"
+},
+{
+"id": "dt164",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Servis motor",
+"date": "2026-02-25",
+"created_at": "2026-02-25T12:00:00"
+},
+{
+"id": "dt165",
+"category_id": "dc5",
+"type": "expense",
+"amount": 75000,
+"note": "",
+"date": "2026-02-03",
+"created_at": "2026-02-03T12:00:00"
+},
+{
+"id": "dt166",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "Kado teman",
+"date": "2026-02-15",
+"created_at": "2026-02-15T12:00:00"
+},
+{
+"id": "dt167",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Obat",
+"date": "2026-02-26",
+"created_at": "2026-02-26T12:00:00"
+},
+{
+"id": "dt168",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-03-01",
+"created_at": "2026-03-01T09:00:00"
+},
+{
+"id": "dt169",
+"category_id": "dc2",
+"type": "income",
+"amount": 500000,
+"note": "Proyek freelance",
+"date": "2026-03-10",
+"created_at": "2026-03-10T14:00:00"
+},
+{
+"id": "dt170",
+"category_id": "dc8",
+"type": "expense",
+"amount": 75000,
+"note": "Nongkrong",
+"date": "2026-03-28",
+"created_at": "2026-03-28T12:00:00"
+},
+{
+"id": "dt171",
+"category_id": "dc5",
+"type": "expense",
+"amount": 12000,
+"note": "",
+"date": "2026-03-22",
+"created_at": "2026-03-22T12:00:00"
+},
+{
+"id": "dt172",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Biaya admin",
+"date": "2026-03-09",
+"created_at": "2026-03-09T12:00:00"
+},
+{
+"id": "dt173",
+"category_id": "dc5",
+"type": "expense",
+"amount": 75000,
+"note": "Kopi",
+"date": "2026-03-16",
+"created_at": "2026-03-16T12:00:00"
+},
+{
+"id": "dt174",
+"category_id": "dc10",
+"type": "expense",
+"amount": 35000,
+"note": "Vitamin",
+"date": "2026-03-19",
+"created_at": "2026-03-19T12:00:00"
+},
+{
+"id": "dt175",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Air PDAM",
+"date": "2026-03-10",
+"created_at": "2026-03-10T12:00:00"
+},
+{
+"id": "dt176",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Ojek online",
+"date": "2026-03-25",
+"created_at": "2026-03-25T12:00:00"
+},
+{
+"id": "dt177",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "",
+"date": "2026-03-16",
+"created_at": "2026-03-16T12:00:00"
+},
+{
+"id": "dt178",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Es teh",
+"date": "2026-03-17",
+"created_at": "2026-03-17T12:00:00"
+},
+{
+"id": "dt179",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Sarapan",
+"date": "2026-03-21",
+"created_at": "2026-03-21T12:00:00"
+},
+{
+"id": "dt180",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Ayam geprek",
+"date": "2026-03-21",
+"created_at": "2026-03-21T12:00:00"
+},
+{
+"id": "dt181",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Tol",
+"date": "2026-03-22",
+"created_at": "2026-03-22T12:00:00"
+},
+{
+"id": "dt182",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Kursus online",
+"date": "2026-03-06",
+"created_at": "2026-03-06T12:00:00"
+},
+{
+"id": "dt183",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "Kopi",
+"date": "2026-03-17",
+"created_at": "2026-03-17T12:00:00"
+},
+{
+"id": "dt184",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-04-01",
+"created_at": "2026-04-01T09:00:00"
+},
+{
+"id": "dt185",
+"category_id": "dc10",
+"type": "expense",
+"amount": 250000,
+"note": "Dokter gigi",
+"date": "2026-04-11",
+"created_at": "2026-04-11T12:00:00"
+},
+{
+"id": "dt186",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "BPJS",
+"date": "2026-04-26",
+"created_at": "2026-04-26T12:00:00"
+},
+{
+"id": "dt187",
+"category_id": "dc6",
+"type": "expense",
+"amount": 10000,
+"note": "Tiket kereta",
+"date": "2026-04-11",
+"created_at": "2026-04-11T12:00:00"
+},
+{
+"id": "dt188",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Kopi",
+"date": "2026-04-11",
+"created_at": "2026-04-11T12:00:00"
+},
+{
+"id": "dt189",
+"category_id": "dc10",
+"type": "expense",
+"amount": 150000,
+"note": "Dokter gigi",
+"date": "2026-04-16",
+"created_at": "2026-04-16T12:00:00"
+},
+{
+"id": "dt190",
+"category_id": "dc6",
+"type": "expense",
+"amount": 10000,
+"note": "Tol",
+"date": "2026-04-08",
+"created_at": "2026-04-08T12:00:00"
+},
+{
+"id": "dt191",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "",
+"date": "2026-04-06",
+"created_at": "2026-04-06T12:00:00"
+},
+{
+"id": "dt192",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tol",
+"date": "2026-04-13",
+"created_at": "2026-04-13T12:00:00"
+},
+{
+"id": "dt193",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Donasi",
+"date": "2026-04-18",
+"created_at": "2026-04-18T12:00:00"
+},
+{
+"id": "dt194",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Peralatan dapur",
+"date": "2026-04-09",
+"created_at": "2026-04-09T12:00:00"
+},
+{
+"id": "dt195",
+"category_id": "dc8",
+"type": "expense",
+"amount": 49000,
+"note": "Nonton bioskop",
+"date": "2026-04-02",
+"created_at": "2026-04-02T12:00:00"
+},
+{
+"id": "dt196",
+"category_id": "dc9",
+"type": "expense",
+"amount": 200000,
+"note": "Pulsa",
+"date": "2026-04-23",
+"created_at": "2026-04-23T12:00:00"
+},
+{
+"id": "dt197",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tiket kereta",
+"date": "2026-04-25",
+"created_at": "2026-04-25T12:00:00"
+},
+{
+"id": "dt198",
+"category_id": "dc7",
+"type": "expense",
+"amount": 200000,
+"note": "Belanja bulanan",
+"date": "2026-04-14",
+"created_at": "2026-04-14T12:00:00"
+},
+{
+"id": "dt199",
+"category_id": "dc7",
+"type": "expense",
+"amount": 200000,
+"note": "Baju",
+"date": "2026-04-02",
+"created_at": "2026-04-02T12:00:00"
+},
+{
+"id": "dt200",
+"category_id": "dc8",
+"type": "expense",
+"amount": 49000,
+"note": "",
+"date": "2026-04-05",
+"created_at": "2026-04-05T12:00:00"
+},
+{
+"id": "dt201",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-05-01",
+"created_at": "2026-05-01T09:00:00"
+},
+{
+"id": "dt202",
+"category_id": "dc2",
+"type": "income",
+"amount": 1000000,
+"note": "Proyek freelance",
+"date": "2026-05-14",
+"created_at": "2026-05-10T14:00:00"
+},
+{
+"id": "dt203",
+"category_id": "dc4",
+"type": "income",
+"amount": 250000,
+"note": "Dividen",
+"date": "2026-05-22",
+"created_at": "2026-05-15T16:00:00"
+},
+{
+"id": "dt204",
+"category_id": "dc11",
+"type": "expense",
+"amount": 150000,
+"note": "Kursus online",
+"date": "2026-05-04",
+"created_at": "2026-05-04T12:00:00"
+},
+{
+"id": "dt205",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Bensin",
+"date": "2026-05-03",
+"created_at": "2026-05-03T12:00:00"
+},
+{
+"id": "dt206",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Es teh",
+"date": "2026-05-28",
+"created_at": "2026-05-28T12:00:00"
+},
+{
+"id": "dt207",
+"category_id": "dc12",
+"type": "expense",
+"amount": 20000,
+"note": "Biaya admin",
+"date": "2026-05-06",
+"created_at": "2026-05-06T12:00:00"
+},
+{
+"id": "dt208",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "Netflix",
+"date": "2026-05-18",
+"created_at": "2026-05-18T12:00:00"
+},
+{
+"id": "dt209",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Belanja bulanan",
+"date": "2026-05-27",
+"created_at": "2026-05-27T12:00:00"
+},
+{
+"id": "dt210",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "Kado teman",
+"date": "2026-05-14",
+"created_at": "2026-05-14T12:00:00"
+},
+{
+"id": "dt211",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "Bakso",
+"date": "2026-05-03",
+"created_at": "2026-05-03T12:00:00"
+},
+{
+"id": "dt212",
+"category_id": "dc9",
+"type": "expense",
+"amount": 100000,
+"note": "Air PDAM",
+"date": "2026-05-21",
+"created_at": "2026-05-21T12:00:00"
+},
+{
+"id": "dt213",
+"category_id": "dc9",
+"type": "expense",
+"amount": 300000,
+"note": "Internet",
+"date": "2026-05-03",
+"created_at": "2026-05-03T12:00:00"
+},
+{
+"id": "dt214",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Ayam geprek",
+"date": "2026-05-17",
+"created_at": "2026-05-17T12:00:00"
+},
+{
+"id": "dt215",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Servis motor",
+"date": "2026-05-11",
+"created_at": "2026-05-11T12:00:00"
+},
+{
+"id": "dt216",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Kado teman",
+"date": "2026-05-10",
+"created_at": "2026-05-10T12:00:00"
+},
+{
+"id": "dt217",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Servis motor",
+"date": "2026-05-17",
+"created_at": "2026-05-17T12:00:00"
+},
+{
+"id": "dt218",
+"category_id": "dc8",
+"type": "expense",
+"amount": 49000,
+"note": "",
+"date": "2026-05-05",
+"created_at": "2026-05-05T12:00:00"
+},
+{
+"id": "dt219",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "",
+"date": "2026-05-04",
+"created_at": "2026-05-04T12:00:00"
+},
+{
+"id": "dt220",
+"category_id": "dc9",
+"type": "expense",
+"amount": 100000,
+"note": "Pulsa",
+"date": "2026-05-19",
+"created_at": "2026-05-19T12:00:00"
+},
+{
+"id": "dt221",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Peralatan dapur",
+"date": "2026-05-26",
+"created_at": "2026-05-26T12:00:00"
+},
+{
+"id": "dt222",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Sarapan",
+"date": "2026-05-19",
+"created_at": "2026-05-19T12:00:00"
+},
+{
+"id": "dt223",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "",
+"date": "2026-05-07",
+"created_at": "2026-05-07T12:00:00"
+},
+{
+"id": "dt224",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-06-01",
+"created_at": "2026-06-01T09:00:00"
+},
+{
+"id": "dt225",
+"category_id": "dc2",
+"type": "income",
+"amount": 750000,
+"note": "Proyek freelance",
+"date": "2026-06-17",
+"created_at": "2026-06-10T14:00:00"
+},
+{
+"id": "dt226",
+"category_id": "dc3",
+"type": "income",
+"amount": 2000000,
+"note": "Bonus",
+"date": "2026-06-25",
+"created_at": "2026-06-25T14:00:00"
+},
+{
+"id": "dt227",
+"category_id": "dc4",
+"type": "income",
+"amount": 400000,
+"note": "Dividen",
+"date": "2026-06-16",
+"created_at": "2026-06-15T16:00:00"
+},
+{
+"id": "dt228",
+"category_id": "dc8",
+"type": "expense",
+"amount": 75000,
+"note": "",
+"date": "2026-06-14",
+"created_at": "2026-06-14T12:00:00"
+},
+{
+"id": "dt229",
+"category_id": "dc10",
+"type": "expense",
+"amount": 250000,
+"note": "Periksa dokter",
+"date": "2026-06-08",
+"created_at": "2026-06-08T12:00:00"
+},
+{
+"id": "dt230",
+"category_id": "dc7",
+"type": "expense",
+"amount": 50000,
+"note": "Peralatan dapur",
+"date": "2026-06-26",
+"created_at": "2026-06-26T12:00:00"
+},
+{
+"id": "dt231",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Ojek online",
+"date": "2026-06-20",
+"created_at": "2026-06-20T12:00:00"
+},
+{
+"id": "dt232",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "Kado teman",
+"date": "2026-06-18",
+"created_at": "2026-06-18T12:00:00"
+},
+{
+"id": "dt233",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Bakso",
+"date": "2026-06-10",
+"created_at": "2026-06-10T12:00:00"
+},
+{
+"id": "dt234",
+"category_id": "dc8",
+"type": "expense",
+"amount": 75000,
+"note": "Game",
+"date": "2026-06-22",
+"created_at": "2026-06-22T12:00:00"
+},
+{
+"id": "dt235",
+"category_id": "dc6",
+"type": "expense",
+"amount": 10000,
+"note": "Ojek online",
+"date": "2026-06-28",
+"created_at": "2026-06-28T12:00:00"
+},
+{
+"id": "dt236",
+"category_id": "dc5",
+"type": "expense",
+"amount": 50000,
+"note": "GoFood",
+"date": "2026-06-15",
+"created_at": "2026-06-15T12:00:00"
+},
+{
+"id": "dt237",
+"category_id": "dc11",
+"type": "expense",
+"amount": 90000,
+"note": "Buku",
+"date": "2026-06-17",
+"created_at": "2026-06-17T12:00:00"
+},
+{
+"id": "dt238",
+"category_id": "dc8",
+"type": "expense",
+"amount": 150000,
+"note": "Game",
+"date": "2026-06-28",
+"created_at": "2026-06-28T12:00:00"
+},
+{
+"id": "dt239",
+"category_id": "dc9",
+"type": "expense",
+"amount": 50000,
+"note": "Internet",
+"date": "2026-06-09",
+"created_at": "2026-06-09T12:00:00"
+},
+{
+"id": "dt240",
+"category_id": "dc5",
+"type": "expense",
+"amount": 35000,
+"note": "Kopi",
+"date": "2026-06-06",
+"created_at": "2026-06-06T12:00:00"
+},
+{
+"id": "dt241",
+"category_id": "dc12",
+"type": "expense",
+"amount": 50000,
+"note": "Donasi",
+"date": "2026-06-26",
+"created_at": "2026-06-26T12:00:00"
+},
+{
+"id": "dt242",
+"category_id": "dc1",
+"type": "income",
+"amount": 8000000,
+"note": "Gaji bulanan",
+"date": "2026-07-01",
+"created_at": "2026-07-01T09:00:00"
+},
+{
+"id": "dt243",
+"category_id": "dc2",
+"type": "income",
+"amount": 500000,
+"note": "Proyek freelance",
+"date": "2026-07-06",
+"created_at": "2026-07-10T14:00:00"
+},
+{
+"id": "dt244",
+"category_id": "dc11",
+"type": "expense",
+"amount": 300000,
+"note": "Seminar",
+"date": "2026-07-03",
+"created_at": "2026-07-03T12:00:00"
+},
+{
+"id": "dt245",
+"category_id": "dc6",
+"type": "expense",
+"amount": 30000,
+"note": "Tol",
+"date": "2026-07-06",
+"created_at": "2026-07-06T12:00:00"
+},
+{
+"id": "dt246",
+"category_id": "dc12",
+"type": "expense",
+"amount": 100000,
+"note": "Donasi",
+"date": "2026-07-15",
+"created_at": "2026-07-15T12:00:00"
+},
+{
+"id": "dt247",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "",
+"date": "2026-07-04",
+"created_at": "2026-07-04T12:00:00"
+},
+{
+"id": "dt248",
+"category_id": "dc11",
+"type": "expense",
+"amount": 150000,
+"note": "Kursus online",
+"date": "2026-07-08",
+"created_at": "2026-07-08T12:00:00"
+},
+{
+"id": "dt249",
+"category_id": "dc6",
+"type": "expense",
+"amount": 80000,
+"note": "Bensin",
+"date": "2026-07-27",
+"created_at": "2026-07-27T12:00:00"
+},
+{
+"id": "dt250",
+"category_id": "dc5",
+"type": "expense",
+"amount": 20000,
+"note": "GoFood",
+"date": "2026-07-19",
+"created_at": "2026-07-19T12:00:00"
+},
+{
+"id": "dt251",
+"category_id": "dc6",
+"type": "expense",
+"amount": 20000,
+"note": "Tiket kereta",
+"date": "2026-07-12",
+"created_at": "2026-07-12T12:00:00"
+},
+{
+"id": "dt252",
+"category_id": "dc10",
+"type": "expense",
+"amount": 75000,
+"note": "Vitamin",
+"date": "2026-07-09",
+"created_at": "2026-07-09T12:00:00"
+},
+{
+"id": "dt253",
+"category_id": "dc8",
+"type": "expense",
+"amount": 54000,
+"note": "Nonton bioskop",
+"date": "2026-07-24",
+"created_at": "2026-07-24T12:00:00"
+},
+{
+"id": "dt254",
+"category_id": "dc5",
+"type": "expense",
+"amount": 25000,
+"note": "Bakso",
+"date": "2026-07-08",
+"created_at": "2026-07-08T12:00:00"
+},
+{
+"id": "dt255",
+"category_id": "dc5",
+"type": "expense",
+"amount": 15000,
+"note": "Bakso",
+"date": "2026-07-10",
+"created_at": "2026-07-10T12:00:00"
+},
+{
+"id": "dt256",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Belanja bulanan",
+"date": "2026-07-09",
+"created_at": "2026-07-09T12:00:00"
+},
+{
+"id": "dt257",
+"category_id": "dc7",
+"type": "expense",
+"amount": 350000,
+"note": "Baju",
+"date": "2026-07-24",
+"created_at": "2026-07-24T12:00:00"
+},
+{
+"id": "dt258",
+"category_id": "dc12",
+"type": "expense",
+"amount": 20000,
+"note": "Donasi",
+"date": "2026-07-14",
+"created_at": "2026-07-14T12:00:00"
+}
+],
+"openings": {
+"2025-06": 3000000
+}
+}

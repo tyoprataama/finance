@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Theme tokens. Dark mode is the default (see index.html).
+   pos/neg are RGB channels so Tailwind opacity modifiers work.
+   ============================================================ */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --elevated: #ffffff;
+  --hairline: rgba(12, 17, 27, 0.08);
+  --fg: #0c111b;
+  --fg-muted: #5b6675;
+  --accent: #214e8a;
+  --accent-strong: #3263a6;
+  --accent-soft: rgba(50, 99, 166, 0.1);
+  --pos: 26 164 106;
+  --neg: 214 90 82;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(12, 17, 27, 0.08);
+}
+
+.dark {
+  --bg: #191919;
+  --surface: #1c1c1c;
+  --elevated: #202020;
+  --hairline: rgba(255, 255, 255, 0.1);
+  --fg: #ffffff;
+  --fg-muted: rgba(255, 255, 255, 0.65);
+  --accent: #7ea4d6;
+  --accent-strong: #5181c0;
+  --accent-soft: rgba(126, 164, 214, 0.16);
+  --pos: 74 222 128;
+  --neg: 242 133 124;
+  --glass: rgba(28, 28, 28, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+/* Floating glass surface (Apple-style navbar) */
+.glass-surface {
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+/* Subtle noise/distortion overlay for glassmorphism */
+.noise-overlay {
+  position: relative;
+  isolation: isolate;
+}
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.045;
+  z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Native controls hint (date pickers, selects, scrollbars) */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
