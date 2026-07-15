@@ -41,32 +41,6 @@ export function useImport() {
     return (data as { id: string }).id
   }
 
-  async function createTransaction(
-    row: ParsedRow,
-    categoryId: string | null,
-  ): Promise<string | null> {
-    if (demo) {
-      demoAddTransaction({
-        type: row.type,
-        amount: row.amount,
-        category_id: categoryId,
-        note: row.note || undefined,
-        date: row.date,
-      })
-      return null
-    }
-    if (!user) return 'Belum login'
-    const { error } = await supabase.from('finance_transactions').insert({
-      user_id: user.id,
-      type: row.type,
-      amount: row.amount,
-      category_id: categoryId,
-      note: row.note || null,
-      date: row.date,
-    })
-    return error ? error.message : null
-  }
-
   async function importRows(
     rows: ParsedRow[],
     categories: Category[],
@@ -81,33 +55,74 @@ export function useImport() {
       let createdCategories = 0
       const errors: string[] = []
 
+      // 1) Buat kategori baru yang belum ada (satu kali per kategori unik).
       for (const row of rows) {
-        let categoryId: string | null = null
         const name = row.category.trim()
-        if (name) {
-          const key = catKey(name, row.type)
-          const existing = map.get(key)
-          if (existing) {
-            categoryId = existing
-          } else {
-            const color = PALETTE[colorIdx % PALETTE.length]
-            colorIdx++
-            const newId = await createCategory(name, row.type, color)
-            if (newId) {
-              map.set(key, newId)
-              categoryId = newId
-              createdCategories++
-            } else if (errors.length < 8) {
-              errors.push(`Gagal membuat kategori "${name}".`)
-            }
-          }
+        if (!name) continue
+        const key = catKey(name, row.type)
+        if (map.has(key)) continue
+        const color = PALETTE[colorIdx % PALETTE.length]
+        colorIdx++
+        const newId = await createCategory(name, row.type, color)
+        if (newId) {
+          map.set(key, newId)
+          createdCategories++
+        } else if (errors.length < 8) {
+          errors.push(`Gagal membuat kategori "${name}".`)
         }
-        const err = await createTransaction(row, categoryId)
-        if (err) {
-          skipped++
-          if (errors.length < 8) errors.push(err)
-        } else {
+      }
+
+      // 2) Petakan setiap baris ke category_id yang sesuai.
+      const prepared = rows.map((row) => {
+        const name = row.category.trim()
+        const categoryId = name ? map.get(catKey(name, row.type)) ?? null : null
+        return { row, categoryId }
+      })
+
+      // Mode demo: simpan di memori saja (tidak menyentuh database).
+      if (demo) {
+        for (const item of prepared) {
+          demoAddTransaction({
+            type: item.row.type,
+            amount: item.row.amount,
+            category_id: item.categoryId,
+            note: item.row.note || undefined,
+            date: item.row.date,
+          })
           imported++
+        }
+        return { imported, skipped, createdCategories, errors }
+      }
+
+      if (!user) {
+        return {
+          imported: 0,
+          skipped: rows.length,
+          createdCategories,
+          errors: ['Belum login.'],
+        }
+      }
+
+      // 3) Insert MASSAL per batch 500 baris.
+      const CHUNK = 500
+      for (let i = 0; i < prepared.length; i += CHUNK) {
+        const slice = prepared.slice(i, i + CHUNK)
+        const records = slice.map((item) => ({
+          user_id: user.id,
+          type: item.row.type,
+          amount: item.row.amount,
+          category_id: item.categoryId,
+          note: item.row.note || null,
+          date: item.row.date,
+        }))
+        const { error } = await supabase
+          .from('finance_transactions')
+          .insert(records)
+        if (error) {
+          skipped += slice.length
+          if (errors.length < 8) errors.push(error.message)
+        } else {
+          imported += slice.length
         }
       }
 

@@ -24,13 +24,28 @@ export function useTransactions() {
     }
     if (!user) return
     setLoading(true)
-    const { data, error } = await supabase
-      .from('finance_transactions')
-      .select('*')
-      .order('date', { ascending: false })
-      .order('created_at', { ascending: false })
-    if (error) setError(error.message)
-    else setTransactions((data ?? []) as Transaction[])
+    const pageSize = 1000
+    let from = 0
+    const all: Transaction[] = []
+    let fetchError: string | null = null
+    for (;;) {
+      const { data, error } = await supabase
+        .from('finance_transactions')
+        .select('*')
+        .order('date', { ascending: false })
+        .order('created_at', { ascending: false })
+        .range(from, from + pageSize - 1)
+      if (error) {
+        fetchError = error.message
+        break
+      }
+      const batch = (data ?? []) as Transaction[]
+      all.push(...batch)
+      if (batch.length < pageSize) break
+      from += pageSize
+    }
+    if (fetchError) setError(fetchError)
+    else setTransactions(all)
     setLoading(false)
   }, [user, demo])
 

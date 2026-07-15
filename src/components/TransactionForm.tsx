@@ -1,84 +1,105 @@
-import { useEffect, useState, type FormEvent } from 'react'
-import { Loader2, Trash2 } from 'lucide-react'
-import type { Category, Transaction, TransactionInput, TxType } from '../types'
-import { digitsOnly, groupThousands, todayISO } from '../utils/format'
+import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { Loader2, Trash2 } from "lucide-react";
+import type { Category, Transaction, TransactionInput, TxType } from "../types";
+import { digitsOnly, groupThousands, todayISO } from "../utils/format";
 
 interface Props {
-  categories: Category[]
-  initial?: Transaction | null
-  defaultDate?: string
-  onSubmit: (input: TransactionInput) => Promise<string | null>
-  onDone: () => void
-  onDelete?: () => void | Promise<void>
+  categories: Category[];
+  initial?: Transaction | null;
+  defaultDate?: string;
+  /** Daftar catatan yang pernah dipakai, dikelompokkan per tipe (untuk autofill). */
+  noteSuggestions?: Record<TxType, string[]>;
+  onSubmit: (input: TransactionInput) => Promise<string | null>;
+  onDone: () => void;
+  onDelete?: () => void | Promise<void>;
 }
 
 const inputClass =
-  'w-full rounded-xl border border-hairline bg-canvas px-3 py-2.5 text-sm text-fg outline-none transition focus:border-accent-strong focus:ring-2 focus:ring-accent-strong/25'
+  "w-full rounded-xl border border-hairline bg-canvas px-3 py-2.5 text-sm text-fg outline-none transition focus:border-accent-strong focus:ring-2 focus:ring-accent-strong/25";
 
 export default function TransactionForm({
   categories,
   initial,
   defaultDate,
+  noteSuggestions,
   onSubmit,
   onDone,
   onDelete,
 }: Props) {
-  const [type, setType] = useState<TxType>(initial?.type ?? 'expense')
+  const [type, setType] = useState<TxType>(initial?.type ?? "expense");
   // amount is stored as a digit-only string; displayed with thousands grouping.
   const [amount, setAmount] = useState<string>(
-    initial ? digitsOnly(String(initial.amount)) : '',
-  )
+    initial ? digitsOnly(String(initial.amount)) : "",
+  );
   const [categoryId, setCategoryId] = useState<string>(
-    initial?.category_id ?? '',
-  )
+    initial?.category_id ?? "",
+  );
   const [date, setDate] = useState<string>(
     initial?.date ?? defaultDate ?? todayISO(),
-  )
-  const [note, setNote] = useState<string>(initial?.note ?? '')
-  const [error, setError] = useState<string | null>(null)
-  const [saving, setSaving] = useState(false)
-  const [deleting, setDeleting] = useState(false)
+  );
+  const [note, setNote] = useState<string>(initial?.note ?? "");
+  const [showSug, setShowSug] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   async function handleDelete() {
-    if (!onDelete) return
-    setDeleting(true)
+    if (!onDelete) return;
+    setDeleting(true);
     try {
-      await onDelete()
+      await onDelete();
     } finally {
-      setDeleting(false)
+      setDeleting(false);
     }
   }
 
-  const options = categories.filter((c) => c.type === type)
+  const options = categories.filter((c) => c.type === type);
+
+  // Cocokkan catatan yang pernah diketik (sesuai tipe) dengan teks saat ini.
+  const noteMatches = useMemo(() => {
+    const q = note.trim().toLowerCase();
+    if (!q) return [];
+    const pool = noteSuggestions?.[type] ?? [];
+    const seen = new Set<string>();
+    const res: string[] = [];
+    for (const s of pool) {
+      const low = s.toLowerCase();
+      if (low === q || !low.includes(q) || seen.has(low)) continue;
+      seen.add(low);
+      res.push(s);
+      if (res.length >= 6) break;
+    }
+    return res;
+  }, [note, type, noteSuggestions]);
 
   useEffect(() => {
     if (categoryId && !options.some((c) => c.id === categoryId)) {
-      setCategoryId('')
+      setCategoryId("");
     }
-  }, [type]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [type]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleSubmit(e: FormEvent) {
-    e.preventDefault()
-    setError(null)
-    const value = Number(amount)
+    e.preventDefault();
+    setError(null);
+    const value = Number(amount);
     if (!value || value <= 0) {
-      setError('Nominal harus lebih dari 0.')
-      return
+      setError("Nominal harus lebih dari 0.");
+      return;
     }
-    setSaving(true)
+    setSaving(true);
     const err = await onSubmit({
       type,
       amount: value,
       category_id: categoryId || null,
       note: note.trim() || undefined,
       date,
-    })
-    setSaving(false)
+    });
+    setSaving(false);
     if (err) {
-      setError(err)
-      return
+      setError(err);
+      return;
     }
-    onDone()
+    onDone();
   }
 
   return (
@@ -86,22 +107,24 @@ export default function TransactionForm({
       <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
-          onClick={() => setType('expense')}
-          className={typeBtn(type === 'expense', 'expense')}
+          onClick={() => setType("expense")}
+          className={typeBtn(type === "expense", "expense")}
         >
           Pengeluaran
         </button>
         <button
           type="button"
-          onClick={() => setType('income')}
-          className={typeBtn(type === 'income', 'income')}
+          onClick={() => setType("income")}
+          className={typeBtn(type === "income", "income")}
         >
           Pemasukan
         </button>
       </div>
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-fg">Nominal</label>
+        <label className="mb-1.5 block text-sm font-medium text-fg">
+          Nominal
+        </label>
         <div className="relative">
           <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm font-medium text-fg-muted">
             Rp
@@ -140,14 +163,17 @@ export default function TransactionForm({
         </select>
         {options.length === 0 && (
           <p className="mt-1 text-xs text-fg-muted">
-            Belum ada kategori {type === 'expense' ? 'pengeluaran' : 'pemasukan'}.
-            Tambahkan di menu Kategori.
+            Belum ada kategori{" "}
+            {type === "expense" ? "pengeluaran" : "pemasukan"}. Tambahkan di
+            menu Kategori.
           </p>
         )}
       </div>
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-fg">Tanggal</label>
+        <label className="mb-1.5 block text-sm font-medium text-fg">
+          Tanggal
+        </label>
         <input
           type="date"
           required
@@ -161,17 +187,50 @@ export default function TransactionForm({
         <label className="mb-1.5 block text-sm font-medium text-fg">
           Catatan (opsional)
         </label>
-        <textarea
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          rows={2}
-          placeholder="mis. Belanja bulanan"
-          className={`${inputClass} resize-none`}
-        />
+        <div className="relative">
+          <textarea
+            value={note}
+            onChange={(e) => {
+              setNote(e.target.value);
+              setShowSug(true);
+            }}
+            onFocus={() => setShowSug(true)}
+            onBlur={() => window.setTimeout(() => setShowSug(false), 120)}
+            rows={2}
+            placeholder="mis. Belanja bulanan"
+            className={`${inputClass} resize-none`}
+          />
+          {showSug && noteMatches.length > 0 && (
+            <ul className="absolute z-20 mt-1 max-h-44 w-full overflow-auto rounded-xl border border-hairline bg-surface py-1 shadow-card">
+              {noteMatches.map((s) => (
+                <li key={s}>
+                  <button
+                    type="button"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => {
+                      setNote(s);
+                      setShowSug(false);
+                    }}
+                    className="block w-full truncate px-3 py-2 text-left text-sm text-fg transition hover:bg-accent-soft hover:text-accent"
+                  >
+                    {s}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {showSug && noteMatches.length > 0 && (
+          <p className="mt-1 text-xs text-fg-muted">
+            Pilih salah satu untuk melengkapi otomatis dari catatan sebelumnya.
+          </p>
+        )}
       </div>
 
       {error && (
-        <p className="rounded-xl bg-neg/10 px-3 py-2 text-sm text-neg">{error}</p>
+        <p className="rounded-xl bg-neg/10 px-3 py-2 text-sm text-neg">
+          {error}
+        </p>
       )}
 
       {initial ? (
@@ -211,13 +270,13 @@ export default function TransactionForm({
         </button>
       )}
     </form>
-  )
+  );
 }
 
 function typeBtn(active: boolean, type: TxType): string {
-  const base = 'rounded-xl border py-2.5 text-sm font-medium transition'
-  if (!active) return `${base} border-hairline text-fg-muted hover:text-fg`
-  return type === 'expense'
+  const base = "rounded-xl border py-2.5 text-sm font-medium transition";
+  if (!active) return `${base} border-hairline text-fg-muted hover:text-fg`;
+  return type === "expense"
     ? `${base} border-neg/40 bg-neg/10 text-neg`
-    : `${base} border-pos/40 bg-pos/10 text-pos`
+    : `${base} border-pos/40 bg-pos/10 text-pos`;
 }
