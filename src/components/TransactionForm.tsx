@@ -137,12 +137,12 @@ export default function TransactionForm({
             value={groupThousands(amount)}
             onChange={(e) => setAmount(digitsOnly(e.target.value))}
             placeholder="0"
-            className={`${inputClass} pl-9 text-right font-medium tabular-nums`}
+            className={`${inputClass} pl-9 text-left font-medium tabular-nums`}
           />
         </div>
-        <p className="mt-1 text-xs text-fg-muted">
+        {/* <p className="mt-1 text-xs text-fg-muted">
           Otomatis diformat, mis. 100.000
-        </p>
+        </p> */}
       </div>
 
       <div>

@@ -34,19 +34,19 @@ export async function exportPdf(
   doc.text(report.title, margin, 52)
   doc.setFontSize(9)
   doc.text(`Periode: ${report.periodLabel}`, margin, 66)
-  doc.setTextColor(MUTED[0], MUTED[1], MUTED[2])
+  // Timestamp saat export (putih agar terlihat di atas header biru)
+  doc.setTextColor(255, 255, 255)
   doc.setFontSize(8)
   doc.text(`Dibuat: ${report.generatedAt}`, pageW - margin, 66, { align: 'right' } as any)
 
   // ---- Summary boxes ----
   const boxes: Array<[string, string, [number, number, number]]> = [
-    ['Saldo awal', formatIDR(report.opening), INK],
-    ['Pemasukan', formatIDR(report.income), POS],
+    ['Pemasukan', formatIDR(report.incomeWithCarry), POS],
     ['Pengeluaran', formatIDR(report.expense), NEG],
     ['Saldo akhir', formatIDR(report.closing), BLUE_DARK],
   ]
   const gap = 10
-  const boxW = (pageW - margin * 2 - gap * 3) / 4
+  const boxW = (pageW - margin * 2 - gap * 2) / 3
   const boxY = 92
   const boxH = 52
   boxes.forEach((b, i) => {
@@ -88,7 +88,7 @@ export async function exportPdf(
       '',
       '',
       '',
-      formatIDR(report.income),
+      formatIDR(report.incomeWithCarry),
       formatIDR(report.expense),
       formatIDR(report.closing),
     ]],

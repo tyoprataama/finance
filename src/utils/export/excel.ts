@@ -61,10 +61,8 @@ export async function exportExcel(
   r += 1
 
   const summary: Array<[string, number, string?]> = [
-    ['Saldo awal (sisa bulan lalu)', report.opening],
-    ['Total pemasukan', report.income, POS],
+    ['Total pemasukan', report.incomeWithCarry, POS],
     ['Total pengeluaran', report.expense, NEG],
-    ['Selisih (net)', report.net],
     ['Saldo akhir', report.closing],
   ]
   summary.forEach(([label, value, color]) => {
@@ -141,7 +139,7 @@ export async function exportExcel(
   tl.fill = fill(BLUE_DARK)
   tl.alignment = { horizontal: 'right' }
   const totIncome = ws.getCell(totalRow, 5)
-  totIncome.value = report.income
+  totIncome.value = report.incomeWithCarry
   const totExpense = ws.getCell(totalRow, 6)
   totExpense.value = report.expense
   const totBal = ws.getCell(totalRow, 7)

@@ -26,6 +26,7 @@ export interface ReportModel {
   generatedAt: string
   opening: number
   income: number
+  incomeWithCarry: number
   expense: number
   net: number
   closing: number
@@ -80,6 +81,20 @@ export function buildReport({
     }
   })
 
+  // Tampilkan sisa bulan lalu sebagai baris pertama (dihitung sebagai pemasukan)
+  // agar total penjumlahan kolom di tabel sama persis dengan KPI/ringkasan.
+  if (opening !== 0) {
+    rows.unshift({
+      date: 'Saldo awal',
+      typeLabel: '—',
+      category: 'Sisa bulan lalu',
+      note: 'Saldo dibawa dari periode sebelumnya',
+      income: opening,
+      expense: 0,
+      balance: opening,
+    })
+  }
+
   const agg = new Map<string, CategoryTotal>()
   sorted.forEach((t) => {
     const cat = t.category_id ? catMap.get(t.category_id) : undefined
@@ -110,6 +125,7 @@ export function buildReport({
     generatedAt: new Date().toLocaleString('id-ID'),
     opening,
     income,
+    incomeWithCarry: opening + income,
     expense,
     net: income - expense,
     closing: opening + income - expense,

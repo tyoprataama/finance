@@ -168,7 +168,10 @@ export default function TransactionsPage() {
   const monthExpense = monthTx
     .filter((t) => t.type === "expense")
     .reduce((s, t) => s + Number(t.amount), 0);
-  const closing = opening + monthIncome - monthExpense;
+  // Sisa bulan lalu (saldo awal) digabung ke dalam pemasukan agar KPI konsisten:
+  // Pemasukan - Pengeluaran = Saldo akhir.
+  const incomeWithCarry = monthIncome + opening;
+  const closing = incomeWithCarry - monthExpense;
 
   const pieData = useMemo(() => {
     const map = new Map<string, number>();
@@ -475,8 +478,13 @@ export default function TransactionsPage() {
         <FadeItem className="rounded-2xl border border-hairline bg-elevated p-4 shadow-card">
           <p className="text-xs text-fg-muted">Pemasukan bulan ini</p>
           <p className="mt-1.5 font-display text-lg font-semibold text-pos">
-            {formatIDR(monthIncome)}
+            {formatIDR(incomeWithCarry)}
           </p>
+          {opening !== 0 && (
+            <p className="mt-0.5 text-[11px] text-fg-muted">
+              termasuk sisa bln lalu {formatIDR(opening)}
+            </p>
+          )}
         </FadeItem>
         <FadeItem className="rounded-2xl border border-hairline bg-elevated p-4 shadow-card">
           <p className="text-xs text-fg-muted">Pengeluaran bulan ini</p>
@@ -620,41 +628,23 @@ export default function TransactionsPage() {
         </div>
       ) : (
         <div className="space-y-4">
-          {/* Carry-over row (editable) */}
-          <div className="flex items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft px-4 py-3">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent-strong text-white">
-              <Wallet size={16} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-medium text-fg">
-                  Saldo awal (sisa bulan lalu)
-                </p>
-                <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                    isOverride
-                      ? "bg-accent-strong text-white"
-                      : "bg-surface text-fg-muted"
-                  }`}
-                >
-                  {isOverride ? "Manual" : "Otomatis"}
-                </span>
-              </div>
-              <p className="text-xs text-fg-muted">
-                {isOverride
-                  ? `Nilai diatur manual untuk ${label}.`
-                  : `Dihitung otomatis dari akumulasi transaksi sebelum ${label}.`}
+          {/* Akses cepat: saldo akhir + tombol tambah (agar tak perlu scroll ke atas di HP) */}
+          <div className="flex items-center justify-between gap-3 rounded-2xl border border-hairline bg-surface px-4 py-3 shadow-card">
+            <div className="min-w-0">
+              <p className="text-xs text-fg-muted">Saldo akhir {label}</p>
+              <p className="font-display text-lg font-semibold text-accent">
+                {formatIDR(closing)}
               </p>
             </div>
-            <span className="shrink-0 font-semibold text-accent">
-              {formatIDR(opening)}
-            </span>
             <button
-              onClick={startEditOpening}
-              aria-label="Edit saldo awal"
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-fg-muted transition hover:bg-surface hover:text-accent"
+              onClick={() => {
+                setEditing(null);
+                setOpen(true);
+              }}
+              className="flex shrink-0 items-center gap-1.5 rounded-full bg-accent-strong px-4 py-2.5 text-sm font-semibold text-white transition hover:brightness-110"
             >
-              <Pencil size={15} />
+              <Plus size={18} />
+              Tambah Transaksi
             </button>
           </div>
 
@@ -732,6 +722,44 @@ export default function TransactionsPage() {
               </div>
             ))
           )}
+
+          {/* Saldo awal (sisa bulan lalu) - di bawah, sesuai urutan tanggal (paling awal). */}
+          <div className="flex items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft px-4 py-3">
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent-strong text-white">
+              <Wallet size={16} />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <p className="text-sm font-medium text-fg">
+                  Saldo awal (sisa bulan lalu)
+                </p>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                    isOverride
+                      ? "bg-accent-strong text-white"
+                      : "bg-surface text-fg-muted"
+                  }`}
+                >
+                  {isOverride ? "Manual" : "Otomatis"}
+                </span>
+              </div>
+              <p className="text-xs text-fg-muted">
+                {isOverride
+                  ? `Nilai diatur manual untuk ${label}.`
+                  : `Dihitung otomatis dari akumulasi transaksi sebelum ${label}.`}
+              </p>
+            </div>
+            <span className="shrink-0 font-semibold text-accent">
+              {formatIDR(opening)}
+            </span>
+            <button
+              onClick={startEditOpening}
+              aria-label="Edit saldo awal"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-fg-muted transition hover:bg-surface hover:text-accent"
+            >
+              <Pencil size={15} />
+            </button>
+          </div>
         </div>
       )}
 
