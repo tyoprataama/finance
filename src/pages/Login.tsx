@@ -204,10 +204,10 @@ export default function Login() {
               onClick={enterDemo}
               className="flex w-full items-center justify-center gap-2 rounded-full border border-hairline bg-canvas py-2.5 text-sm font-semibold text-fg transition hover:bg-accent-soft hover:text-accent"
             >
-              <Eye size={16} /> Lihat UI tanpa login (Mode Demo)
+              <Eye size={16} /> Mode Demo
             </button>
             <p className="mt-2 text-center text-xs text-fg-muted">
-              Mode Demo memakai data contoh di browser, tanpa Supabase.
+              Mode Demo memakai data dummy dan tidak akan menyimpan data Anda.
             </p>
           </div>
         </motion.div>
