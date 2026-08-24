@@ -8,6 +8,10 @@ interface Props {
   income: number
   expense: number
   balanceLabel?: string
+  /** Catatan kecil di bawah kartu Pemasukan (mis. "termasuk sisa periode lalu"). */
+  incomeNote?: string
+  /** Catatan kecil di bawah kartu selisih/saldo. */
+  balanceNote?: string
 }
 
 function toneText(t: Tone): string {
@@ -27,21 +31,31 @@ export default function SummaryCards({
   income,
   expense,
   balanceLabel = 'Saldo',
+  incomeNote,
+  balanceNote,
 }: Props) {
   const balance = income - expense
   const cards = [
-    { label: 'Pemasukan', value: income, icon: TrendingUp, tone: 'pos' as Tone },
+    {
+      label: 'Pemasukan',
+      value: income,
+      icon: TrendingUp,
+      tone: 'pos' as Tone,
+      note: incomeNote,
+    },
     {
       label: 'Pengeluaran',
       value: expense,
       icon: TrendingDown,
       tone: 'neg' as Tone,
+      note: undefined as string | undefined,
     },
     {
       label: balanceLabel,
       value: balance,
       icon: Wallet,
       tone: (balance >= 0 ? 'accent' : 'neg') as Tone,
+      note: balanceNote,
     },
   ]
 
@@ -67,6 +81,11 @@ export default function SummaryCards({
             >
               {formatIDR(c.value)}
             </p>
+            {c.note && (
+              <p className="mt-1 text-[11px] leading-snug text-fg-muted">
+                {c.note}
+              </p>
+            )}
           </FadeItem>
         )
       })}

@@ -98,6 +98,9 @@ export default function TransactionsPage() {
   const [typeFilter, setTypeFilter] = useState<TypeFilter>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [search, setSearch] = useState("");
+  // Cakupan pencarian: "all" = seluruh data (semua bulan & tahun),
+  // "month" = hanya bulan yang sedang dibuka.
+  const [searchScope, setSearchScope] = useState<"all" | "month">("all");
   const [pieKind, setPieKind] = useState<TxType>("expense");
   const [importOpen, setImportOpen] = useState(false);
 
@@ -174,19 +177,23 @@ export default function TransactionsPage() {
   const closing = incomeWithCarry - monthExpense;
 
   const pieData = useMemo(() => {
-    const map = new Map<string, number>();
+    const map = new Map<string, { value: number; count: number }>();
     monthTx
       .filter((t) => t.type === pieKind)
       .forEach((t) => {
         const key = t.category_id ?? "none";
-        map.set(key, (map.get(key) ?? 0) + Number(t.amount));
+        const cur = map.get(key) ?? { value: 0, count: 0 };
+        cur.value += Number(t.amount);
+        cur.count += 1;
+        map.set(key, cur);
       });
     return [...map.entries()]
-      .map(([catId, value]) => {
+      .map(([catId, v]) => {
         const cat = catMap.get(catId);
         return {
           name: cat?.name ?? "Tanpa Kategori",
-          value,
+          value: v.value,
+          count: v.count,
           color: cat?.color ?? "#7D7A75",
           catId,
         };
@@ -194,6 +201,28 @@ export default function TransactionsPage() {
       .sort((a, b) => b.value - a.value);
   }, [monthTx, catMap, pieKind]);
   const pieTotal = pieData.reduce((s, d) => s + d.value, 0);
+
+  // Kategori yang sedang dipilih dari pie chart / legenda, dipakai untuk
+  // menampilkan total secara permanen di layar (tidak hanya lewat tooltip,
+  // karena tooltip tidak terlihat di perangkat mobile).
+  const selectedSlice = useMemo(() => {
+    if (categoryFilter === "all") return null;
+    return pieData.find((d) => d.catId === categoryFilter) ?? null;
+  }, [pieData, categoryFilter]);
+
+  // Total kategori terpilih sepanjang waktu (semua bulan), sebagai konteks.
+  const selectedAllTime = useMemo(() => {
+    if (categoryFilter === "all") return { total: 0, count: 0 };
+    let total = 0;
+    let count = 0;
+    transactions.forEach((t) => {
+      if (t.type !== pieKind) return;
+      if ((t.category_id ?? "none") !== categoryFilter) return;
+      total += Number(t.amount);
+      count += 1;
+    });
+    return { total, count };
+  }, [transactions, categoryFilter, pieKind]);
 
   function handlePieClick(d: any) {
     const id = d?.catId ?? d?.payload?.catId;
@@ -230,6 +259,94 @@ export default function TransactionsPage() {
     });
     return Array.from(map.entries()).sort((a, b) => (a[0] < b[0] ? 1 : -1));
   }, [filtered]);
+
+  // ---- Pencarian global (semua waktu) ----
+  const query = search.trim().toLowerCase();
+  const globalSearchActive = query.length > 0 && searchScope === "all";
+
+  const globalSearch = useMemo(() => {
+    if (!query) {
+      return {
+        rows: [] as Transaction[],
+        groups: [] as Array<[string, Transaction[]]>,
+        byCat: [] as Array<{
+          catId: string;
+          name: string;
+          color: string;
+          total: number;
+          count: number;
+        }>,
+        income: 0,
+        expense: 0,
+        first: "",
+        last: "",
+      };
+    }
+
+    // Cari di SELURUH data (tanpa batas bulan/tahun). Filter tipe & kategori
+    // tetap dihormati agar hasil bisa dipersempit bila perlu.
+    const rows = transactions
+      .filter((t) => {
+        if (typeFilter !== "all" && t.type !== typeFilter) return false;
+        if (categoryFilter !== "all") {
+          if (categoryFilter === "none" && t.category_id) return false;
+          if (categoryFilter !== "none" && t.category_id !== categoryFilter)
+            return false;
+        }
+        const catName = t.category_id
+          ? (catMap.get(t.category_id)?.name ?? "")
+          : "Tanpa Kategori";
+        const hay = `${t.note ?? ""} ${catName}`.toLowerCase();
+        return hay.includes(query);
+      })
+      .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+    let income = 0;
+    let expense = 0;
+    const catAgg = new Map<string, { total: number; count: number }>();
+    const dateMap = new Map<string, Transaction[]>();
+
+    rows.forEach((t) => {
+      const amount = Number(t.amount);
+      if (t.type === "income") income += amount;
+      else expense += amount;
+
+      const key = t.category_id ?? "none";
+      const cur = catAgg.get(key) ?? { total: 0, count: 0 };
+      cur.total += amount;
+      cur.count += 1;
+      catAgg.set(key, cur);
+
+      const arr = dateMap.get(t.date) ?? [];
+      arr.push(t);
+      dateMap.set(t.date, arr);
+    });
+
+    const byCat = [...catAgg.entries()]
+      .map(([catId, v]) => {
+        const cat = catId === "none" ? null : catMap.get(catId);
+        return {
+          catId,
+          name: cat?.name ?? "Tanpa Kategori",
+          color: cat?.color ?? "#7D7A75",
+          total: v.total,
+          count: v.count,
+        };
+      })
+      .sort((a, b) => b.total - a.total);
+
+    const dates = rows.map((t) => t.date).sort();
+
+    return {
+      rows,
+      groups: [...dateMap.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1)),
+      byCat,
+      income,
+      expense,
+      first: dates[0] ?? "",
+      last: dates[dates.length - 1] ?? "",
+    };
+  }, [query, transactions, typeFilter, categoryFilter, catMap]);
 
   function goPrev() {
     if (month === 0) {
@@ -569,17 +686,89 @@ export default function TransactionsPage() {
                       />
                       <span className="truncate">{d.name}</span>
                     </span>
-                    <span className="shrink-0 tabular-nums font-medium text-fg-muted">
-                      {pieTotal > 0
-                        ? Math.round((d.value / pieTotal) * 100)
-                        : 0}
-                      %
+                    <span className="flex shrink-0 items-center gap-2 tabular-nums">
+                      <span
+                        className={`font-semibold ${
+                          pieKind === "income" ? "text-pos" : "text-neg"
+                        }`}
+                      >
+                        {formatIDR(d.value)}
+                      </span>
+                      <span className="text-xs font-medium text-fg-muted">
+                        {pieTotal > 0
+                          ? Math.round((d.value / pieTotal) * 100)
+                          : 0}
+                        %
+                      </span>
                     </span>
                   </button>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Total kategori terpilih — selalu tampil (bukan tooltip),
+              supaya tetap terbaca di perangkat mobile. */}
+          {selectedSlice && (
+            <div className="mt-4 rounded-2xl border border-accent/30 bg-accent-soft p-4">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="inline-block h-3 w-3 shrink-0 rounded-full"
+                      style={dotStyle(selectedSlice.color)}
+                    />
+                    <p className="truncate font-display text-base font-semibold text-fg">
+                      {selectedSlice.name}
+                    </p>
+                    <span className="rounded-full bg-surface px-2 py-0.5 text-[10px] font-medium text-fg-muted">
+                      {pieKind === "income" ? "Pemasukan" : "Pengeluaran"}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-fg-muted">
+                    {selectedSlice.count} transaksi di {label} ·{" "}
+                    {pieTotal > 0
+                      ? Math.round((selectedSlice.value / pieTotal) * 100)
+                      : 0}
+                    % dari total{" "}
+                    {pieKind === "income" ? "pemasukan" : "pengeluaran"} bulan ini
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    setCategoryFilter("all");
+                    setTypeFilter("all");
+                  }}
+                  className="shrink-0 rounded-full border border-hairline bg-surface px-3 py-1.5 text-xs font-medium text-fg-muted transition hover:text-accent"
+                >
+                  Hapus filter
+                </button>
+              </div>
+              <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-hairline bg-surface px-3 py-2.5">
+                  <p className="text-[11px] text-fg-muted">
+                    Total {pieKind === "income" ? "pemasukan" : "pengeluaran"}{" "}
+                    {label}
+                  </p>
+                  <p
+                    className={`mt-0.5 font-display text-lg font-semibold tabular-nums ${
+                      pieKind === "income" ? "text-pos" : "text-neg"
+                    }`}
+                  >
+                    {formatIDR(selectedSlice.value)}
+                  </p>
+                </div>
+                <div className="rounded-xl border border-hairline bg-surface px-3 py-2.5">
+                  <p className="text-[11px] text-fg-muted">
+                    Total sepanjang waktu ({selectedAllTime.count} transaksi)
+                  </p>
+                  <p className="mt-0.5 font-display text-lg font-semibold tabular-nums text-fg">
+                    {formatIDR(selectedAllTime.total)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </FadeIn>
       )}
 
@@ -593,9 +782,31 @@ export default function TransactionsPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari catatan / kategori"
+            placeholder='Cari pemasukan atau pengeluaran'
             className="w-full rounded-full border border-hairline bg-surface py-2 pl-9 pr-3 text-sm text-fg outline-none focus:border-accent-strong"
           />
+        </div>
+        <div className="flex self-start rounded-full border border-hairline bg-surface p-0.5 text-xs sm:self-auto">
+          <button
+            onClick={() => setSearchScope("all")}
+            className={`rounded-full px-3 py-1.5 font-medium transition ${
+              searchScope === "all"
+                ? "bg-accent-strong text-white"
+                : "text-fg-muted"
+            }`}
+          >
+            Semua waktu
+          </button>
+          <button
+            onClick={() => setSearchScope("month")}
+            className={`rounded-full px-3 py-1.5 font-medium transition ${
+              searchScope === "month"
+                ? "bg-accent-strong text-white"
+                : "text-fg-muted"
+            }`}
+          >
+            Bulan ini
+          </button>
         </div>
         <select
           value={typeFilter}
@@ -625,6 +836,165 @@ export default function TransactionsPage() {
       {loading ? (
         <div className="grid h-40 place-items-center rounded-2xl border border-hairline bg-surface text-fg-muted">
           Memuat…
+        </div>
+      ) : globalSearchActive ? (
+        /* ---- Hasil pencarian lintas waktu ---- */
+        <div className="space-y-4">
+          <div className="rounded-3xl border border-hairline bg-surface p-4 shadow-card">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div className="min-w-0">
+                <h2 className="font-display text-base font-semibold">
+                  Hasil pencarian “{search.trim()}”
+                </h2>
+                <p className="mt-0.5 text-xs text-fg-muted">
+                  {globalSearch.rows.length} transaksi dari seluruh data
+                  {globalSearch.rows.length > 0 && (
+                    <>
+                      {" · "}
+                      {formatDateID(globalSearch.first)} s/d{" "}
+                      {formatDateID(globalSearch.last)}
+                    </>
+                  )}
+                </p>
+              </div>
+              <button
+                onClick={() => setSearch("")}
+                className="shrink-0 rounded-full border border-hairline px-3 py-1.5 text-xs font-medium text-fg-muted transition hover:text-accent"
+              >
+                Bersihkan
+              </button>
+            </div>
+
+            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-hairline bg-elevated px-4 py-3">
+                <p className="text-[11px] text-fg-muted">
+                  Total pengeluaran (semua waktu)
+                </p>
+                <p className="mt-0.5 font-display text-lg font-semibold tabular-nums text-neg">
+                  {formatIDR(globalSearch.expense)}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-hairline bg-elevated px-4 py-3">
+                <p className="text-[11px] text-fg-muted">
+                  Total pemasukan (semua waktu)
+                </p>
+                <p className="mt-0.5 font-display text-lg font-semibold tabular-nums text-pos">
+                  {formatIDR(globalSearch.income)}
+                </p>
+              </div>
+              <div className="rounded-2xl border border-hairline bg-elevated px-4 py-3">
+                <p className="text-[11px] text-fg-muted">Selisih</p>
+                <p className="mt-0.5 font-display text-lg font-semibold tabular-nums text-accent">
+                  {formatIDR(globalSearch.income - globalSearch.expense)}
+                </p>
+              </div>
+            </div>
+
+            {globalSearch.byCat.length > 1 && (
+              <div className="mt-3 overflow-x-auto rounded-2xl border border-hairline">
+                <table className="w-full min-w-[320px] text-left text-sm">
+                  <thead className="bg-elevated text-xs uppercase tracking-wide text-fg-muted">
+                    <tr>
+                      <th className="px-4 py-2 font-medium">Kategori</th>
+                      <th className="px-4 py-2 text-right font-medium">Transaksi</th>
+                      <th className="px-4 py-2 text-right font-medium">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-hairline">
+                    {globalSearch.byCat.map((c) => (
+                      <tr key={c.catId}>
+                        <td className="px-4 py-2">
+                          <span className="flex items-center gap-2">
+                            <span
+                              className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"
+                              style={dotStyle(c.color)}
+                            />
+                            <span className="font-medium text-fg">{c.name}</span>
+                          </span>
+                        </td>
+                        <td className="px-4 py-2 text-right tabular-nums text-fg-muted">
+                          {c.count}
+                        </td>
+                        <td className="px-4 py-2 text-right font-semibold tabular-nums text-fg">
+                          {formatIDR(c.total)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {globalSearch.groups.length === 0 ? (
+            <div className="grid place-items-center rounded-2xl border border-dashed border-hairline bg-surface px-6 py-14 text-center text-sm text-fg-muted">
+              Tidak ada transaksi yang cocok dengan “{search.trim()}”.
+            </div>
+          ) : (
+            globalSearch.groups.map(([date, items]) => (
+              <div key={date}>
+                <p className="mb-2 px-1 text-xs font-medium uppercase tracking-wide text-fg-muted">
+                  {formatDateID(date)}
+                </p>
+                <div className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline bg-surface shadow-card">
+                  {items.map((t) => {
+                    const cat = t.category_id ? catMap.get(t.category_id) : null;
+                    const income = t.type === "income";
+                    return (
+                      <div key={t.id} className="flex items-start gap-3 px-4 py-3">
+                        <span
+                          className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full ${
+                            income ? "bg-pos/12 text-pos" : "bg-neg/12 text-neg"
+                          }`}
+                        >
+                          {income ? (
+                            <ArrowUpRight size={16} />
+                          ) : (
+                            <ArrowDownRight size={16} />
+                          )}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="break-words text-sm font-medium text-fg">
+                            {t.note?.trim() || (cat?.name ?? "Tanpa Kategori")}
+                          </p>
+                          <div className="mt-0.5 flex flex-wrap items-center gap-2">
+                            <span
+                              className="h-2 w-2 shrink-0 rounded-full"
+                              style={dotStyle(cat?.color)}
+                            />
+                            <span className="text-xs text-fg-muted">
+                              {cat?.name ?? "Tanpa Kategori"}
+                            </span>
+                            <span className="text-xs text-fg-muted">
+                              · {formatDateID(t.date)}
+                            </span>
+                          </div>
+                          <span
+                            className={`mt-1 block text-sm font-semibold tabular-nums ${
+                              income ? "text-pos" : "text-neg"
+                            }`}
+                          >
+                            {income ? "+" : "\u2212"}
+                            {formatIDR(Number(t.amount))}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setEditing(t);
+                            setOpen(true);
+                          }}
+                          aria-label="Edit transaksi"
+                          className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-fg-muted transition hover:bg-accent-soft hover:text-accent"
+                        >
+                          <Pencil size={15} />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       ) : (
         <div className="space-y-4">

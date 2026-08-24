@@ -36,12 +36,16 @@ export function resolveOpening(
     if (k < earliest) earliest = k
   }
 
+  if (target <= earliest) return { opening: 0, isOverride: false }
+
   let opening = 0
   let y = Number(earliest.slice(0, 4))
   let m = Number(earliest.slice(5, 7))
   for (let guard = 0; guard < 100000; guard++) {
     const k = `${y}-${String(m).padStart(2, '0')}`
-    if (k === target) break
+    // Berhenti tepat di bulan target (atau jika sudah melewatinya, sebagai
+    // pengaman agar tidak pernah mengakumulasi bulan setelah target).
+    if (k >= target) break
     const openThis = overrides[k] != null ? overrides[k] : opening
     opening = openThis + (net.get(k) ?? 0)
     m++

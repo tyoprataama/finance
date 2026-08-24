@@ -17,6 +17,8 @@ import {
 import { TrendingUp, ChevronLeft } from 'lucide-react'
 import { useTransactions } from '../hooks/useTransactions'
 import { useCategories } from '../hooks/useCategories'
+import { useOpeningBalances } from '../hooks/useOpeningBalances'
+import { balanceBefore } from '../utils/balance'
 import SummaryCards from '../components/SummaryCards'
 import { FadeIn } from '../components/FadeUp'
 import {
@@ -90,6 +92,7 @@ function swatchStyle(color: string) {
 export default function Dashboard() {
   const { transactions, loading } = useTransactions()
   const { categories } = useCategories()
+  const { overrides } = useOpeningBalances()
 
   const now = new Date()
   const [mode, setMode] = useState<RangeMode>('year')
@@ -192,6 +195,18 @@ export default function Dashboard() {
   const totalExpense = filtered
     .filter((t) => t.type === 'expense')
     .reduce((s, t) => s + Number(t.amount), 0)
+
+  // Saldo awal periode ("sisa periode sebelumnya"). Nilai ini adalah saldo
+  // berjalan tepat sebelum tanggal mulai periode, memakai override manual bila
+  // ada. Sama seperti halaman Transaksi, saldo awal diperlakukan sebagai
+  // bagian dari pemasukan agar rumusnya konsisten:
+  //   Pemasukan (termasuk saldo awal) - Pengeluaran = Selisih / saldo akhir.
+  const opening = useMemo(
+    () => balanceBefore(transactions, overrides, startISO),
+    [transactions, overrides, startISO],
+  )
+  const incomeWithCarry = totalIncome + opening
+  const netBalance = incomeWithCarry - totalExpense
 
   const trendCategory = useMemo(() => {
     if (categories.length === 0) return null
@@ -421,7 +436,17 @@ export default function Dashboard() {
       </FadeIn>
 
       {/* Summary */}
-      <SummaryCards income={totalIncome} expense={totalExpense} balanceLabel="Selisih" />
+      <SummaryCards
+        income={incomeWithCarry}
+        expense={totalExpense}
+        balanceLabel="Selisih"
+        incomeNote={
+          opening !== 0
+            ? `Termasuk saldo awal (sisa periode lalu) ${formatIDR(opening)} + pemasukan ${formatIDR(totalIncome)}`
+            : undefined
+        }
+        balanceNote={`Pemasukan − Pengeluaran = ${formatIDR(netBalance)}`}
+      />
 
       {/* Charts row */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
