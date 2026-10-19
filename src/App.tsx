@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import TransactionsPage from './pages/Transactions'
 import CategoriesPage from './pages/Categories'
+import NotFoundPage from './pages/NotFound'
 
 function FullScreenLoader() {
   return (
@@ -46,7 +47,7 @@ export default function App() {
         <Route path="transaksi" element={<TransactionsPage />} />
         <Route path="kategori" element={<CategoriesPage />} />
       </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }

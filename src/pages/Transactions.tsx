@@ -48,6 +48,86 @@ function dotStyle(color?: string) {
   return { backgroundColor: color ?? "#7D7A75" };
 }
 
+function DailyTotals({ items }: { items: Transaction[] }) {
+  const incomeTotal = items
+    .filter((transaction) => transaction.type === "income")
+    .reduce((total, transaction) => total + Math.abs(Number(transaction.amount) || 0), 0);
+  const expenseTotal = items
+    .filter((transaction) => transaction.type === "expense")
+    .reduce((total, transaction) => total + Math.abs(Number(transaction.amount) || 0), 0);
+
+  return (
+    <div className="flex w-full items-center justify-end gap-4 text-sm sm:w-auto">
+      <span className="font-semibold tabular-nums text-pos">
+        {formatIDR(incomeTotal)}
+      </span>
+      <span className="font-semibold tabular-nums text-neg">
+        {formatIDR(expenseTotal)}
+      </span>
+    </div>
+  );
+}
+
+function TransactionRow({
+  t,
+  cat,
+  showDate = false,
+  onEdit,
+}: {
+  t: Transaction;
+  cat?: { name: string; color?: string } | null;
+  showDate?: boolean;
+  onEdit: (t: Transaction) => void;
+}) {
+  const income = t.type === "income";
+  return (
+    <button
+      type="button"
+      onClick={() => onEdit(t)}
+      aria-label="Edit transaksi"
+      className="flex w-full items-start gap-3 px-4 py-3 text-left transition hover:bg-accent-soft/50 active:bg-accent-soft"
+    >
+      <span
+        className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full ${
+          income ? "bg-pos/12 text-pos" : "bg-neg/12 text-neg"
+        }`}
+      >
+        {income ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
+      </span>
+
+      <div className="min-w-0 flex-1">
+        <p className="break-words text-sm font-medium text-fg">
+          {t.note?.trim() || (cat?.name ?? "Tanpa Kategori")}
+        </p>
+        <div className="mt-0.5 flex flex-wrap items-center gap-2">
+          <span
+            className="h-2 w-2 shrink-0 rounded-full"
+            style={dotStyle(cat?.color)}
+          />
+          <span className="text-xs text-fg-muted">
+            {cat?.name ?? "Tanpa Kategori"}
+          </span>
+          {showDate && (
+            <span className="text-xs text-fg-muted">
+              · {formatDateID(t.date)}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Nominal di pojok kanan, menggantikan ikon pensil */}
+      <span
+        className={`mt-0.5 shrink-0 whitespace-nowrap text-sm font-semibold tabular-nums ${
+          income ? "text-pos" : "text-neg"
+        }`}
+      >
+        {income ? "+" : "\u2212"}
+        {formatIDR(Number(t.amount))}
+      </span>
+    </button>
+  );
+}
+
 function isoOf(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
     d.getDate(),
@@ -367,6 +447,10 @@ export default function TransactionsPage() {
   function closeModal() {
     setOpen(false);
     setEditing(null);
+  }
+  function handleEdit(t: Transaction) {
+    setEditing(t);
+    setOpen(true);
   }
 
   async function handleDeleteEditing() {
@@ -731,7 +815,8 @@ export default function TransactionsPage() {
                       ? Math.round((selectedSlice.value / pieTotal) * 100)
                       : 0}
                     % dari total{" "}
-                    {pieKind === "income" ? "pemasukan" : "pengeluaran"} bulan ini
+                    {pieKind === "income" ? "pemasukan" : "pengeluaran"} bulan
+                    ini
                   </p>
                 </div>
                 <button
@@ -782,7 +867,7 @@ export default function TransactionsPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder='Cari pemasukan atau pengeluaran'
+            placeholder="Cari pemasukan atau pengeluaran"
             className="w-full rounded-full border border-hairline bg-surface py-2 pl-9 pr-3 text-sm text-fg outline-none focus:border-accent-strong"
           />
         </div>
@@ -896,8 +981,12 @@ export default function TransactionsPage() {
                   <thead className="bg-elevated text-xs uppercase tracking-wide text-fg-muted">
                     <tr>
                       <th className="px-4 py-2 font-medium">Kategori</th>
-                      <th className="px-4 py-2 text-right font-medium">Transaksi</th>
-                      <th className="px-4 py-2 text-right font-medium">Total</th>
+                      <th className="px-4 py-2 text-right font-medium">
+                        Transaksi
+                      </th>
+                      <th className="px-4 py-2 text-right font-medium">
+                        Total
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-hairline">
@@ -909,7 +998,9 @@ export default function TransactionsPage() {
                               className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"
                               style={dotStyle(c.color)}
                             />
-                            <span className="font-medium text-fg">{c.name}</span>
+                            <span className="font-medium text-fg">
+                              {c.name}
+                            </span>
                           </span>
                         </td>
                         <td className="px-4 py-2 text-right tabular-nums text-fg-muted">
@@ -933,64 +1024,22 @@ export default function TransactionsPage() {
           ) : (
             globalSearch.groups.map(([date, items]) => (
               <div key={date}>
-                <p className="mb-2 px-1 text-xs font-medium uppercase tracking-wide text-fg-muted">
-                  {formatDateID(date)}
-                </p>
+                <div className="mb-2 flex flex-col gap-2 px-1 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-xs font-medium uppercase tracking-wide text-fg-muted">
+                    {formatDateID(date)}
+                  </p>
+                  <DailyTotals items={items} />
+                </div>
                 <div className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline bg-surface shadow-card">
-                  {items.map((t) => {
-                    const cat = t.category_id ? catMap.get(t.category_id) : null;
-                    const income = t.type === "income";
-                    return (
-                      <div key={t.id} className="flex items-start gap-3 px-4 py-3">
-                        <span
-                          className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full ${
-                            income ? "bg-pos/12 text-pos" : "bg-neg/12 text-neg"
-                          }`}
-                        >
-                          {income ? (
-                            <ArrowUpRight size={16} />
-                          ) : (
-                            <ArrowDownRight size={16} />
-                          )}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="break-words text-sm font-medium text-fg">
-                            {t.note?.trim() || (cat?.name ?? "Tanpa Kategori")}
-                          </p>
-                          <div className="mt-0.5 flex flex-wrap items-center gap-2">
-                            <span
-                              className="h-2 w-2 shrink-0 rounded-full"
-                              style={dotStyle(cat?.color)}
-                            />
-                            <span className="text-xs text-fg-muted">
-                              {cat?.name ?? "Tanpa Kategori"}
-                            </span>
-                            <span className="text-xs text-fg-muted">
-                              · {formatDateID(t.date)}
-                            </span>
-                          </div>
-                          <span
-                            className={`mt-1 block text-sm font-semibold tabular-nums ${
-                              income ? "text-pos" : "text-neg"
-                            }`}
-                          >
-                            {income ? "+" : "\u2212"}
-                            {formatIDR(Number(t.amount))}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() => {
-                            setEditing(t);
-                            setOpen(true);
-                          }}
-                          aria-label="Edit transaksi"
-                          className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-fg-muted transition hover:bg-accent-soft hover:text-accent"
-                        >
-                          <Pencil size={15} />
-                        </button>
-                      </div>
-                    );
-                  })}
+                  {items.map((t) => (
+                    <TransactionRow
+                      key={t.id}
+                      t={t}
+                      cat={t.category_id ? catMap.get(t.category_id) : null}
+                      showDate
+                      onEdit={handleEdit}
+                    />
+                  ))}
                 </div>
               </div>
             ))
@@ -1028,66 +1077,21 @@ export default function TransactionsPage() {
           ) : (
             groups.map(([date, items]) => (
               <div key={date}>
-                <p className="mb-2 px-1 text-xs font-medium uppercase tracking-wide text-fg-muted">
-                  {formatDateID(date)}
-                </p>
+                <div className="mb-2 flex flex-col gap-2 px-1 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-xs font-medium uppercase tracking-wide text-fg-muted">
+                    {formatDateID(date)}
+                  </p>
+                  <DailyTotals items={items} />
+                </div>
                 <div className="divide-y divide-hairline overflow-hidden rounded-2xl border border-hairline bg-surface shadow-card">
-                  {items.map((t) => {
-                    const cat = t.category_id
-                      ? catMap.get(t.category_id)
-                      : null;
-                    const income = t.type === "income";
-                    return (
-                      <div
-                        key={t.id}
-                        className="flex items-start gap-3 px-4 py-3"
-                      >
-                        <span
-                          className={`mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full ${
-                            income ? "bg-pos/12 text-pos" : "bg-neg/12 text-neg"
-                          }`}
-                        >
-                          {income ? (
-                            <ArrowUpRight size={16} />
-                          ) : (
-                            <ArrowDownRight size={16} />
-                          )}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="break-words text-sm font-medium text-fg">
-                            {t.note?.trim() || (cat?.name ?? "Tanpa Kategori")}
-                          </p>
-                          <div className="mt-0.5 flex items-center gap-2">
-                            <span
-                              className="h-2 w-2 shrink-0 rounded-full"
-                              style={dotStyle(cat?.color)}
-                            />
-                            <span className="text-xs text-fg-muted">
-                              {cat?.name ?? "Tanpa Kategori"}
-                            </span>
-                          </div>
-                          <span
-                            className={`mt-1 block text-sm font-semibold tabular-nums ${
-                              income ? "text-pos" : "text-neg"
-                            }`}
-                          >
-                            {income ? "+" : "\u2212"}
-                            {formatIDR(Number(t.amount))}
-                          </span>
-                        </div>
-                        <button
-                          onClick={() => {
-                            setEditing(t);
-                            setOpen(true);
-                          }}
-                          aria-label="Edit transaksi"
-                          className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-fg-muted transition hover:bg-accent-soft hover:text-accent"
-                        >
-                          <Pencil size={15} />
-                        </button>
-                      </div>
-                    );
-                  })}
+                  {items.map((t) => (
+                    <TransactionRow
+                      key={t.id}
+                      t={t}
+                      cat={t.category_id ? catMap.get(t.category_id) : null}
+                      onEdit={handleEdit}
+                    />
+                  ))}
                 </div>
               </div>
             ))
